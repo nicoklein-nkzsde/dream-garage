@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Design-Direction aus Abschnitt 10 des Briefings.
+   Nur ein UI-Akzent: gebrochenes Gelb wie Stellplatzmarkierung. */
+@theme {
+  --color-ink: #0a0a0b;
+  --color-surface: #141416;
+  --color-line: #26262a;
+  --color-paper: #e8e8e6;
+  --color-muted: #7d7d82;
+  --color-accent: #e8b53a;
+
+  --font-sans: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-tech: var(--font-condensed), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-none: 0px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Hintergrund NUR auf html: der Canvas liegt mit negativem z-index hinter
+   dem Inhalt und würde von einem Body-Background verdeckt. */
+html {
+  background: var(--color-ink);
+  color: var(--color-paper);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lenis: das Smooth-Scrolling braucht diese beiden Regeln, sonst
+   kollidiert natives Scroll-Chaining mit dem virtuellen Scroll. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Beschriftungen wie in einer Bauzeichnung: klein, versal, gesperrt. */
+.tech-label {
+  font-family: var(--font-tech);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  line-height: 1.1;
+  color: var(--color-muted);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
 }

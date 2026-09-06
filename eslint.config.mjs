@@ -13,6 +13,14 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    // React Three Fiber schreibt in useFrame absichtlich direkt auf Objekte
+    // der Szene. Das ist hier der ganze Punkt: ein State-Update pro Frame
+    // würde die Fahrt ruckeln lassen. Die Immutability-Regel des React
+    // Compilers passt deshalb nicht auf die Szene.
+    files: ["components/scene/**/*.tsx"],
+    rules: { "react-hooks/immutability": "off" },
+  },
 ]);
 
 export default eslintConfig;
