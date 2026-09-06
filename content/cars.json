@@ -1,0 +1,50 @@
+[
+  {
+    "id": "cayman-981-s",
+    "slot": 1,
+    "status": "owned",
+    "make": "Porsche",
+    "model": "Cayman S (981)",
+    "year": 2014,
+    "owner": "lion",
+    "body": "coupe",
+    "dimensions": { "length": 4.38, "width": 1.8, "height": 1.29, "wheelbase": 2.48 },
+    "data": {
+      "Motor": "3,4 l Boxer, Saugmotor",
+      "Leistung": "325 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1320 kg",
+      "0 auf 100": "4,7 s"
+    },
+    "spec": ["Handschalter", "PCCB Keramikbremse", "Vollausstattung"],
+    "why": "TODO: Text von Lion — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#c8102e"
+  },
+  {
+    "id": "e30-m3",
+    "slot": 7,
+    "status": "wishlist",
+    "make": "BMW",
+    "model": "M3 (E30)",
+    "year": 1990,
+    "owner": "both",
+    "body": "sedan",
+    "dimensions": { "length": 4.36, "width": 1.68, "height": 1.37, "wheelbase": 2.56 },
+    "data": {
+      "Motor": "S14, 2,3 l Vierzylinder",
+      "Leistung": "215 PS",
+      "Getriebe": "5-Gang Handschalter",
+      "Gewicht": "1200 kg",
+      "Preisspanne": "TODO: von Nico"
+    },
+    "spec": ["S14", "Handschalter"],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#0066b1"
+  }
+]

@@ -6,7 +6,7 @@ import { Text } from "@react-three/drei";
 import { MeshStandardMaterial, type Group, type MeshBasicMaterial } from "three";
 import { smoothstep } from "@/lib/cameraPath";
 import { scrollState } from "@/components/scroll/scrollState";
-import { CAR_BOX, HALL, HALL_BOUNDS, SLOTS, SLOT_SIZE } from "@/lib/hall";
+import { HALL, HALL_BOUNDS, SLOTS, SLOT_SIZE } from "@/lib/hall";
 
 const FLOOR = "#232328";
 const CONCRETE = "#2a2a2f";
@@ -115,22 +115,6 @@ export default function PlaceholderHall() {
       {SLOTS.map((slot) => (
         <group key={slot.number} position={[slot.x, 0, slot.z]}>
           <SlotMarking />
-
-          {/* Platzhalter-Fahrzeug in echten Abmessungen */}
-          <mesh
-            position={[0, CAR_BOX.height / 2 + 0.05, 0]}
-            rotation-y={slot.rotation}
-          >
-            <boxGeometry
-              args={[CAR_BOX.width, CAR_BOX.height, CAR_BOX.length]}
-            />
-            <meshStandardMaterial
-              color={slot.status === "owned" ? CONCRETE : ACCENT}
-              roughness={0.55}
-              metalness={0.15}
-              wireframe={slot.status === "wishlist"}
-            />
-          </mesh>
         </group>
       ))}
 

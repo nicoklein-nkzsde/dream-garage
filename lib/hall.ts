@@ -30,10 +30,10 @@ export type Slot = {
   /** Mittelpunkt der Bodenmarkierung. */
   x: number;
   z: number;
-  /** Blickrichtung des Fahrzeugs in Grad um Y. */
+  /** Blickrichtung des Fahrzeugs, Rotation um Y. */
   rotation: number;
-  /** Platzhalter bis Phase 3: belegt oder Wunschauto. */
-  status: "owned" | "wishlist";
+  /** Seite der Mittelgasse: 1 = Torwand, -1 = Werkbankwand. */
+  side: 1 | -1;
 };
 
 export const SLOT_SIZE = { width: 3.2, depth: 5.6 } as const;
@@ -47,20 +47,20 @@ const ROW_GATE = 6.9; // Reihe an der Torwand
 const ROW_BACK = -6.9; // Reihe an der Werkbankwand
 
 export const SLOTS: Slot[] = [
-  // Reihe an der Torwand, Nummern 1–6
+  // Reihe an der Torwand, Nummern 1–6. Nase zur Mittelgasse.
   ...COLUMNS.map((x, i) => ({
     number: i + 1,
     x,
     z: ROW_GATE,
     rotation: 0,
-    status: (i % 2 === 0 ? "owned" : "wishlist") as Slot["status"],
+    side: 1 as const,
   })),
-  // Reihe an der Rückwand, Nummern 7–12
+  // Reihe an der Werkbankwand, Nummern 7–12.
   ...COLUMNS.map((x, i) => ({
     number: i + 7,
     x,
     z: ROW_BACK,
     rotation: Math.PI,
-    status: (i < 3 ? "owned" : "wishlist") as Slot["status"],
+    side: -1 as const,
   })),
 ];

@@ -2,8 +2,9 @@
 
 import FadeRange from "./FadeRange";
 import { HALL, SLOTS } from "@/lib/hall";
+import { CARS } from "@/lib/cars";
 
-const owned = SLOTS.filter((slot) => slot.status === "owned").length;
+const owned = CARS.filter((car) => car.status === "owned").length;
 
 /**
  * Die HTML-Ebene über der Fahrt. Alles hängt an p, nichts an eigenen

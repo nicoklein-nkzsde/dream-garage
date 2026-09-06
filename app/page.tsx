@@ -2,6 +2,8 @@ import SceneMount from "@/components/scene/SceneMount";
 import SmoothScroll from "@/components/scroll/SmoothScroll";
 import { CHOREOGRAPHY_ID } from "@/components/scroll/constants";
 import ChoreographyOverlay from "@/components/ui/ChoreographyOverlay";
+import CarPanel from "@/components/ui/CarPanel";
+import HoverLabel from "@/components/ui/HoverLabel";
 import { HallSection, PeopleSection, SiteFooter } from "@/components/ui/Sections";
 
 /** Höhe der Kamerafahrt in Viewport-Höhen. Mehr = ruhigere Fahrt. */
@@ -13,6 +15,8 @@ export default function Home() {
       <SmoothScroll />
       <SceneMount />
       <ChoreographyOverlay />
+      <CarPanel />
+      <HoverLabel />
 
       <noscript>
         <p className="p-6 text-sm text-muted">
