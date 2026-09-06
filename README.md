@@ -3,8 +3,21 @@
 Onepage-Website für die gemeinsame Traum-Garage von Nico Klein und Lion Kalaba.
 Spezifikation: [PROJEKT_BRIEFING.md](./PROJEKT_BRIEFING.md).
 
-Privates Projekt, noch ohne eigene Domain. Die Seite ist auf `noindex`
-gestellt und `public/robots.txt` sperrt alle Crawler aus.
+Läuft als statischer Export auf GitHub Pages:
+<https://nicoklein-nkzsde.github.io/dream-garage/>
+
+Kein Shop, kein Login, kein CMS. Die Seite steht auf `noindex`, taucht also
+nicht in Suchergebnissen auf, ist über den Link aber öffentlich erreichbar.
+`public/robots.txt` greift bei einem Projekt-Pages-Pfad nicht, weil Crawler
+robots.txt nur im Wurzelverzeichnis der Domain lesen — der gehört zu einem
+anderen Repo. Der `noindex`-Header aus `app/layout.tsx` gilt trotzdem.
+
+## Deployment
+
+Jeder Push auf `main` baut und veröffentlicht über
+`.github/workflows/deploy.yml`. Der Workflow prüft vorher Typen und Lint.
+Der Basispfad `/dream-garage` wird nur dort gesetzt, lokal läuft die Seite
+weiter auf `http://localhost:3000`.
 
 ## Entwickeln
 
