@@ -13,9 +13,15 @@ import type { BodyType, Car } from "./cars";
  * ohne dass sich sonst etwas ändert.
  */
 
-type Proportions = {
+export type Proportions = {
   /** Höhe der Gürtellinie als Anteil der Fahrzeughöhe. */
   belt: number;
+  /** Wölbung des Dachs. 0 = gerade Kante, 1 = stark gewölbt wie ein 911. */
+  roofCurve: number;
+  /** Höhe der Nase als Anteil der Gürtellinie. Klein = flache Schnauze. */
+  nose: number;
+  /** Höhe der Heckkante als Anteil der Gürtellinie. */
+  tail: number;
   /** Radradius als Anteil der Fahrzeughöhe. */
   wheel: number;
   /** Höhe der Dachkante als Anteil der Fahrzeughöhe. */
@@ -28,16 +34,21 @@ type Proportions = {
   glass: [number, number, number, number];
 };
 
+/**
+ * Grundwerte je Bauform. Jedes Auto kann sie über `shape` in cars.json
+ * einzeln überschreiben — darüber bekommt ein 911 seine durchgehend
+ * fallende Dachlinie und ein RX-7 seine flache Nase.
+ */
 const PROPORTIONS: Record<BodyType, Proportions> = {
-  coupe: { belt: 0.58, wheel: 0.26, roof: 1, glass: [0.38, 0.55, 0.71, 0.93] },
+  coupe: { belt: 0.66, wheel: 0.26, roof: 1, roofCurve: 0.5, nose: 0.82, tail: 0.92, glass: [0.38, 0.55, 0.71, 0.93] },
   // Roadster: nur Scheibe und Überrollbügel, kein Dach.
-  roadster: { belt: 0.68, wheel: 0.27, roof: 0.9, glass: [0.42, 0.56, 0.62, 0.7] },
-  hatch: { belt: 0.55, wheel: 0.26, roof: 1, glass: [0.34, 0.5, 0.74, 0.87] },
-  sedan: { belt: 0.56, wheel: 0.25, roof: 1, glass: [0.36, 0.52, 0.72, 0.85] },
-  wagon: { belt: 0.55, wheel: 0.25, roof: 1, glass: [0.35, 0.51, 0.92, 0.98] },
-  suv: { belt: 0.58, wheel: 0.28, roof: 1, glass: [0.34, 0.48, 0.84, 0.95] },
+  roadster: { belt: 0.70, wheel: 0.27, roof: 0.92, roofCurve: 0.2, nose: 0.8, tail: 0.92, glass: [0.42, 0.56, 0.62, 0.7] },
+  hatch: { belt: 0.68, wheel: 0.26, roof: 1, roofCurve: 0.3, nose: 0.86, tail: 0.97, glass: [0.34, 0.5, 0.74, 0.87] },
+  sedan: { belt: 0.68, wheel: 0.25, roof: 1, roofCurve: 0.3, nose: 0.85, tail: 0.9, glass: [0.36, 0.52, 0.72, 0.85] },
+  wagon: { belt: 0.67, wheel: 0.25, roof: 1, roofCurve: 0.2, nose: 0.85, tail: 0.99, glass: [0.35, 0.51, 0.92, 0.98] },
+  suv: { belt: 0.66, wheel: 0.28, roof: 1, roofCurve: 0.22, nose: 0.9, tail: 0.99, glass: [0.34, 0.48, 0.84, 0.95] },
   // Bus: Scheibe weit vorn und steil, Dach fast über die ganze Länge.
-  van: { belt: 0.45, wheel: 0.2, roof: 1, glass: [0.2, 0.33, 0.93, 0.99] },
+  van: { belt: 0.68, wheel: 0.2, roof: 1, roofCurve: 0.12, nose: 0.93, tail: 0.99, glass: [0.2, 0.33, 0.93, 0.99] },
 };
 
 const BEVEL = 0.03;
@@ -50,13 +61,25 @@ export type CarGeometry = {
   glass: ExtrudeGeometry;
   wheel: { radius: number; width: number; axleX: number; offsetZ: number };
   height: number;
+  width: number;
+  /** Ankerpunkte für Spiegel, Leuchten und Flügel. */
+  anchors: {
+    front: number;
+    rear: number;
+    belt: number;
+    cowl: number;
+    roofY: number;
+  };
   /** Nur für die Profilkontrolle in der Entwicklung. */
   __shapes: { body: Shape; roof: Shape; glass: Shape };
 };
 
 export function buildCarGeometry(car: Car): CarGeometry {
   const { length, width, height, wheelbase } = car.dimensions;
-  const shape = PROPORTIONS[car.body] ?? PROPORTIONS.coupe;
+  const shape = {
+    ...(PROPORTIONS[car.body] ?? PROPORTIONS.coupe),
+    ...(car.shape ?? {}),
+  };
 
   const front = length / 2;
   const rear = -length / 2;
@@ -76,22 +99,27 @@ export function buildCarGeometry(car: Car): CarGeometry {
   body.lineTo(front - 0.06, clearance);
   // Vordere Stoßstange, Nase, Motorhaube bis zum Windlauf.
   body.quadraticCurveTo(front, clearance, front, clearance + 0.16);
-  body.lineTo(front - 0.01, belt - 0.14);
+  body.lineTo(front - length * 0.022, belt * shape.nose);
   body.quadraticCurveTo(front - 0.12, belt, front - length * 0.16, belt);
   body.lineTo(wsBase, belt);
   // Gürtellinie nach hinten, dann Heckabschluss.
   body.lineTo(backBase, belt);
-  body.lineTo(rear + 0.14, belt - 0.03);
-  body.quadraticCurveTo(rear, belt - 0.05, rear, belt - 0.22);
+  body.lineTo(rear + 0.14, belt * shape.tail);
+  body.quadraticCurveTo(rear, belt * shape.tail - 0.02, rear, belt * shape.tail - 0.22);
   body.lineTo(rear, clearance + 0.16);
   body.quadraticCurveTo(rear, clearance, rear + 0.06, clearance);
 
   const roofY = height * shape.roof;
 
+  // Gewölbte Dachlinie: die Kante fällt zu beiden Enden ab, der Scheitel
+  // liegt dazwischen. Bei roofCurve = 0 bleibt es eine gerade Kante.
+  const dome = height * 0.05 * shape.roofCurve;
+  const roofMid = (roofFront + roofRear) / 2;
+
   const roof = new Shape();
   roof.moveTo(wsBase, belt - 0.02);
-  roof.lineTo(roofFront, roofY);
-  roof.lineTo(roofRear, roofY);
+  roof.lineTo(roofFront, roofY - dome);
+  roof.quadraticCurveTo(roofMid, roofY + dome, roofRear, roofY - dome);
   roof.lineTo(backBase, belt - 0.02);
   roof.lineTo(wsBase, belt - 0.02);
 
@@ -100,8 +128,13 @@ export function buildCarGeometry(car: Car): CarGeometry {
   const inset = 0.09;
   const glass = new Shape();
   glass.moveTo(wsBase - inset * 1.4, belt + 0.04);
-  glass.lineTo(roofFront - inset, roofY - inset * 0.8);
-  glass.lineTo(roofRear + inset, roofY - inset * 0.8);
+  glass.lineTo(roofFront - inset, roofY - dome - inset * 0.8);
+  glass.quadraticCurveTo(
+    roofMid,
+    roofY + dome - inset * 0.8,
+    roofRear + inset,
+    roofY - dome - inset * 0.8,
+  );
   glass.lineTo(backBase + inset * 1.6, belt + 0.04);
   glass.lineTo(wsBase - inset * 1.4, belt + 0.04);
 
@@ -118,6 +151,8 @@ export function buildCarGeometry(car: Car): CarGeometry {
       offsetZ: width / 2 - width * 0.13 / 2 - 0.02,
     },
     height,
+    width,
+    anchors: { front, rear, belt, cowl: wsBase, roofY: roofY + dome },
   };
 }
 

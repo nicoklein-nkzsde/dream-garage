@@ -17,8 +17,13 @@
     "data": {
       "Motor": "1,8 l Vierzylinder, Saugmotor",
       "Leistung": "192 PS",
+      "Drehmoment": "181 Nm",
+      "Antrieb": "Hinterrad, Mittelmotor",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "860 kg"
+      "Gewicht": "860 kg",
+      "0 auf 100": "5,1 s",
+      "Höchstgeschwindigkeit": "243 km/h",
+      "Bauzeit": "2004–2011"
     },
     "spec": [
       "Handschalter",
@@ -29,7 +34,21 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#2a7fb8"
+    "accent": "#2a7fb8",
+    "shape": {
+      "belt": 0.66,
+      "wheel": 0.29,
+      "roof": 0.92,
+      "roofCurve": 0.3,
+      "nose": 0.62,
+      "tail": 0.86,
+      "glass": [
+        0.4,
+        0.52,
+        0.6,
+        0.72
+      ]
+    }
   },
   {
     "id": "s2000",
@@ -47,10 +66,15 @@
       "wheelbase": 2.4
     },
     "data": {
-      "Motor": "F20C, 2,0 l Saugmotor",
+      "Motor": "F20C, 2,0 l Vierzylinder, Saugmotor",
       "Leistung": "240 PS",
+      "Drehmoment": "208 Nm",
+      "Antrieb": "Hinterrad, Frontmittelmotor",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1260 kg"
+      "Gewicht": "1260 kg",
+      "0 auf 100": "6,2 s",
+      "Höchstgeschwindigkeit": "240 km/h",
+      "Bauzeit": "1999–2009"
     },
     "spec": [
       "Handschalter",
@@ -61,16 +85,30 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#e6e6e2"
+    "accent": "#e6e6e2",
+    "shape": {
+      "belt": 0.7,
+      "wheel": 0.27,
+      "roof": 0.94,
+      "roofCurve": 0.25,
+      "nose": 0.66,
+      "tail": 0.9,
+      "glass": [
+        0.44,
+        0.56,
+        0.64,
+        0.74
+      ]
+    }
   },
   {
     "id": "cayman-981-s",
     "slot": 3,
-    "status": "owned",
+    "status": "wishlist",
     "make": "Porsche",
     "model": "Cayman S (981)",
     "year": 2014,
-    "owner": "lion",
+    "owner": "both",
     "body": "coupe",
     "dimensions": {
       "length": 4.38,
@@ -79,10 +117,15 @@
       "wheelbase": 2.48
     },
     "data": {
-      "Motor": "3,4 l Boxer, Saugmotor",
+      "Motor": "3,4 l Sechszylinder-Boxer, Saugmotor",
       "Leistung": "325 PS",
+      "Drehmoment": "370 Nm",
+      "Antrieb": "Hinterrad, Mittelmotor",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1320 kg"
+      "Gewicht": "1320 kg",
+      "0 auf 100": "5,0 s",
+      "Höchstgeschwindigkeit": "283 km/h",
+      "Bauzeit": "2012–2016"
     },
     "spec": [
       "Handschalter",
@@ -94,7 +137,19 @@
     "splat": null,
     "media": [],
     "accent": "#c8102e",
-    "note": "Aus dem Briefing übernommen. Status und Werte bitte bestätigen."
+    "note": "Aus dem Briefing übernommen. Steht wie alle anderen auf der Wunschliste.",
+    "shape": {
+      "belt": 0.66,
+      "roofCurve": 0.75,
+      "nose": 0.66,
+      "tail": 0.94,
+      "glass": [
+        0.34,
+        0.48,
+        0.62,
+        0.86
+      ]
+    }
   },
   {
     "id": "1er-m",
@@ -112,10 +167,15 @@
       "wheelbase": 2.66
     },
     "data": {
-      "Motor": "N54, 3,0 l Reihensechser Biturbo",
+      "Motor": "N54, 3,0 l Reihensechser, Biturbo",
       "Leistung": "340 PS",
+      "Drehmoment": "450 Nm",
+      "Antrieb": "Hinterrad",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1495 kg"
+      "Gewicht": "1495 kg",
+      "0 auf 100": "4,9 s",
+      "Höchstgeschwindigkeit": "250 km/h (abgeregelt)",
+      "Bauzeit": "2011"
     },
     "spec": [
       "Handschalter",
@@ -126,7 +186,19 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#c85a1e"
+    "accent": "#c85a1e",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.4,
+      "nose": 0.84,
+      "tail": 0.9,
+      "glass": [
+        0.36,
+        0.5,
+        0.72,
+        0.9
+      ]
+    }
   },
   {
     "id": "golf-r32",
@@ -146,8 +218,13 @@
     "data": {
       "Motor": "3,2 l VR6, Saugmotor",
       "Leistung": "241 PS",
+      "Drehmoment": "320 Nm",
+      "Antrieb": "Allrad (4motion)",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1477 kg"
+      "Gewicht": "1477 kg",
+      "0 auf 100": "6,6 s",
+      "Höchstgeschwindigkeit": "247 km/h",
+      "Bauzeit": "2002–2004"
     },
     "spec": [
       "VR6-Sound",
@@ -159,7 +236,19 @@
     "splat": null,
     "media": [],
     "accent": "#1b4fa0",
-    "note": "Alternative aus der Liste: Golf VR6 statt R32."
+    "note": "Alternative aus der Liste: Golf VR6 statt R32.",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.3,
+      "nose": 0.84,
+      "tail": 0.98,
+      "glass": [
+        0.33,
+        0.47,
+        0.78,
+        0.9
+      ]
+    }
   },
   {
     "id": "audi-s3-8p",
@@ -177,10 +266,15 @@
       "wheelbase": 2.58
     },
     "data": {
-      "Motor": "2,0 l TFSI Turbo",
+      "Motor": "2,0 l TFSI, Turbo",
       "Leistung": "265 PS",
+      "Drehmoment": "350 Nm",
+      "Antrieb": "Allrad (quattro)",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1455 kg"
+      "Gewicht": "1455 kg",
+      "0 auf 100": "5,7 s",
+      "Höchstgeschwindigkeit": "250 km/h (abgeregelt)",
+      "Bauzeit": "2008–2012"
     },
     "spec": [
       "quattro",
@@ -190,7 +284,19 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#9aa0a6"
+    "accent": "#9aa0a6",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.3,
+      "nose": 0.84,
+      "tail": 0.97,
+      "glass": [
+        0.34,
+        0.48,
+        0.78,
+        0.9
+      ]
+    }
   },
   {
     "id": "c63-w204",
@@ -208,10 +314,15 @@
       "wheelbase": 2.76
     },
     "data": {
-      "Motor": "M156, 6,2 l V8 Saugmotor",
+      "Motor": "M156, 6,2 l V8, Saugmotor",
       "Leistung": "457 PS",
+      "Drehmoment": "600 Nm",
+      "Antrieb": "Hinterrad",
       "Getriebe": "7-Gang Automatik",
-      "Gewicht": "1730 kg"
+      "Gewicht": "1730 kg",
+      "0 auf 100": "4,5 s",
+      "Höchstgeschwindigkeit": "250 km/h (abgeregelt)",
+      "Bauzeit": "2008–2014"
     },
     "spec": [
       "V8-Sauger",
@@ -221,8 +332,20 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#14161a",
-    "note": "W203 gab es nur als C 55 AMG, den C 63 erst ab W204."
+    "accent": "#3a3f47",
+    "note": "W203 gab es nur als C 55 AMG, den C 63 erst ab W204.",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.35,
+      "nose": 0.82,
+      "tail": 0.86,
+      "glass": [
+        0.36,
+        0.5,
+        0.74,
+        0.87
+      ]
+    }
   },
   {
     "id": "e60-m5",
@@ -240,10 +363,15 @@
       "wheelbase": 2.89
     },
     "data": {
-      "Motor": "S85, 5,0 l V10 Saugmotor",
+      "Motor": "S85, 5,0 l V10, Saugmotor",
       "Leistung": "507 PS",
+      "Drehmoment": "520 Nm",
+      "Antrieb": "Hinterrad",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1830 kg"
+      "Gewicht": "1830 kg",
+      "0 auf 100": "4,7 s",
+      "Höchstgeschwindigkeit": "250 km/h (abgeregelt)",
+      "Bauzeit": "2005–2010"
     },
     "spec": [
       "V10",
@@ -255,7 +383,19 @@
     "splat": null,
     "media": [],
     "accent": "#4a5560",
-    "note": "Den Handschalter gab es ab Werk nur in den USA."
+    "note": "Den Handschalter gab es ab Werk nur in den USA.",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.35,
+      "nose": 0.8,
+      "tail": 0.86,
+      "glass": [
+        0.36,
+        0.5,
+        0.76,
+        0.88
+      ]
+    }
   },
   {
     "id": "997-gt3",
@@ -273,10 +413,15 @@
       "wheelbase": 2.36
     },
     "data": {
-      "Motor": "3,6 l Boxer, Saugmotor",
+      "Motor": "3,6 l Sechszylinder-Boxer, Saugmotor",
       "Leistung": "415 PS",
+      "Drehmoment": "405 Nm",
+      "Antrieb": "Hinterrad, Heckmotor",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1395 kg"
+      "Gewicht": "1395 kg",
+      "0 auf 100": "4,3 s",
+      "Höchstgeschwindigkeit": "310 km/h",
+      "Bauzeit": "2006–2009"
     },
     "spec": [
       "Handschalter",
@@ -287,7 +432,20 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#2f6fbf"
+    "accent": "#2f6fbf",
+    "shape": {
+      "belt": 0.66,
+      "roofCurve": 0.95,
+      "nose": 0.66,
+      "tail": 0.98,
+      "glass": [
+        0.33,
+        0.46,
+        0.58,
+        0.94
+      ]
+    },
+    "wing": true
   },
   {
     "id": "f430",
@@ -305,10 +463,15 @@
       "wheelbase": 2.6
     },
     "data": {
-      "Motor": "4,3 l V8 Saugmotor",
+      "Motor": "4,3 l V8, Saugmotor",
       "Leistung": "490 PS",
+      "Drehmoment": "465 Nm",
+      "Antrieb": "Hinterrad, Mittelmotor",
       "Getriebe": "6-Gang Handschalter oder F1",
-      "Gewicht": "1450 kg"
+      "Gewicht": "1450 kg",
+      "0 auf 100": "4,0 s",
+      "Höchstgeschwindigkeit": "315 km/h",
+      "Bauzeit": "2004–2009"
     },
     "spec": [
       "V8-Sauger",
@@ -319,7 +482,19 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#d4021d"
+    "accent": "#d4021d",
+    "shape": {
+      "belt": 0.64,
+      "roofCurve": 0.7,
+      "nose": 0.6,
+      "tail": 1.0,
+      "glass": [
+        0.3,
+        0.44,
+        0.6,
+        0.82
+      ]
+    }
   },
   {
     "id": "rx7-fd",
@@ -339,8 +514,13 @@
     "data": {
       "Motor": "13B-REW, Zweischeiben-Wankel, Twinturbo",
       "Leistung": "280 PS",
+      "Drehmoment": "314 Nm",
+      "Antrieb": "Hinterrad",
       "Getriebe": "5-Gang Handschalter",
-      "Gewicht": "1270 kg"
+      "Gewicht": "1270 kg",
+      "0 auf 100": "5,3 s",
+      "Höchstgeschwindigkeit": "250 km/h",
+      "Bauzeit": "1991–2002"
     },
     "spec": [
       "Wankelmotor",
@@ -351,7 +531,19 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#b3121b"
+    "accent": "#b3121b",
+    "shape": {
+      "belt": 0.64,
+      "roofCurve": 0.85,
+      "nose": 0.58,
+      "tail": 0.92,
+      "glass": [
+        0.36,
+        0.5,
+        0.66,
+        0.9
+      ]
+    }
   },
   {
     "id": "350z",
@@ -369,10 +561,15 @@
       "wheelbase": 2.65
     },
     "data": {
-      "Motor": "VQ35DE, 3,5 l V6 Saugmotor",
+      "Motor": "VQ35DE, 3,5 l V6, Saugmotor",
       "Leistung": "280 PS",
+      "Drehmoment": "363 Nm",
+      "Antrieb": "Hinterrad",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1500 kg"
+      "Gewicht": "1500 kg",
+      "0 auf 100": "5,8 s",
+      "Höchstgeschwindigkeit": "250 km/h",
+      "Bauzeit": "2002–2009"
     },
     "spec": [
       "Handschalter",
@@ -382,7 +579,19 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#d96a1f"
+    "accent": "#d96a1f",
+    "shape": {
+      "belt": 0.66,
+      "roofCurve": 0.7,
+      "nose": 0.66,
+      "tail": 0.98,
+      "glass": [
+        0.34,
+        0.48,
+        0.64,
+        0.86
+      ]
+    }
   },
   {
     "id": "cayman-r-987",
@@ -400,10 +609,15 @@
       "wheelbase": 2.42
     },
     "data": {
-      "Motor": "3,4 l Boxer, Saugmotor",
+      "Motor": "3,4 l Sechszylinder-Boxer, Saugmotor",
       "Leistung": "330 PS",
+      "Drehmoment": "370 Nm",
+      "Antrieb": "Hinterrad, Mittelmotor",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1295 kg"
+      "Gewicht": "1295 kg",
+      "0 auf 100": "5,0 s",
+      "Höchstgeschwindigkeit": "282 km/h",
+      "Bauzeit": "2010–2012"
     },
     "spec": [
       "55 kg leichter",
@@ -415,7 +629,19 @@
     "splat": null,
     "media": [],
     "accent": "#dcdcd8",
-    "note": "Zweiter Cayman neben dem 981 S. Einer von beiden kann raus."
+    "note": "Zweiter Cayman neben dem 981 S. Einer von beiden kann raus.",
+    "shape": {
+      "belt": 0.66,
+      "roofCurve": 0.75,
+      "nose": 0.66,
+      "tail": 0.94,
+      "glass": [
+        0.34,
+        0.48,
+        0.62,
+        0.86
+      ]
+    }
   },
   {
     "id": "sl-r129",
@@ -435,8 +661,13 @@
     "data": {
       "Motor": "TODO: Motorisierung von Nico",
       "Leistung": "TODO",
+      "Drehmoment": "TODO",
+      "Antrieb": "Hinterrad",
       "Getriebe": "Automatik",
-      "Gewicht": "ca. 1800 kg"
+      "Gewicht": "ca. 1800 kg",
+      "0 auf 100": "TODO",
+      "Höchstgeschwindigkeit": "250 km/h (abgeregelt)",
+      "Bauzeit": "1989–2001"
     },
     "spec": [
       "Hardtop",
@@ -447,7 +678,20 @@
     "splat": null,
     "media": [],
     "accent": "#b6b8bb",
-    "note": "R192 gibt es nicht. Angenommen ist R129 — bitte bestätigen."
+    "note": "R192 gibt es nicht. Angenommen ist R129 — bitte bestätigen.",
+    "shape": {
+      "belt": 0.7,
+      "roofCurve": 0.2,
+      "nose": 0.76,
+      "tail": 0.9,
+      "glass": [
+        0.44,
+        0.56,
+        0.68,
+        0.8
+      ],
+      "roof": 0.94
+    }
   },
   {
     "id": "gr-yaris",
@@ -465,10 +709,15 @@
       "wheelbase": 2.56
     },
     "data": {
-      "Motor": "G16E, 1,6 l Dreizylinder Turbo",
+      "Motor": "G16E, 1,6 l Dreizylinder, Turbo",
       "Leistung": "261 PS",
+      "Drehmoment": "360 Nm",
+      "Antrieb": "Allrad (GR-Four)",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1280 kg"
+      "Gewicht": "1280 kg",
+      "0 auf 100": "5,5 s",
+      "Höchstgeschwindigkeit": "230 km/h",
+      "Bauzeit": "seit 2020"
     },
     "spec": [
       "Allrad",
@@ -480,7 +729,19 @@
     "splat": null,
     "media": [],
     "accent": "#cfd2d6",
-    "note": "Von Nico als eventuell markiert."
+    "note": "Von Nico als eventuell markiert.",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.3,
+      "nose": 0.82,
+      "tail": 0.98,
+      "glass": [
+        0.32,
+        0.46,
+        0.8,
+        0.92
+      ]
+    }
   },
   {
     "id": "leon-fr-1m",
@@ -498,10 +759,15 @@
       "wheelbase": 2.51
     },
     "data": {
-      "Motor": "1,8 l Turbo",
+      "Motor": "1,8 l Vierzylinder, Turbo",
       "Leistung": "180 PS",
+      "Drehmoment": "235 Nm",
+      "Antrieb": "Frontantrieb",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1300 kg"
+      "Gewicht": "1300 kg",
+      "0 auf 100": "7,6 s",
+      "Höchstgeschwindigkeit": "228 km/h",
+      "Bauzeit": "2000–2005"
     },
     "spec": [
       "Handschalter"
@@ -511,7 +777,19 @@
     "splat": null,
     "media": [],
     "accent": "#c23a2b",
-    "note": "TODO: Benziner 1.8T oder FR TDI?"
+    "note": "TODO: Benziner 1.8T oder FR TDI?",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.3,
+      "nose": 0.84,
+      "tail": 0.97,
+      "glass": [
+        0.34,
+        0.48,
+        0.78,
+        0.9
+      ]
+    }
   },
   {
     "id": "964",
@@ -529,10 +807,15 @@
       "wheelbase": 2.27
     },
     "data": {
-      "Motor": "3,6 l Boxer, Saugmotor",
+      "Motor": "3,6 l Sechszylinder-Boxer, luftgekühlt",
       "Leistung": "250 PS",
+      "Drehmoment": "310 Nm",
+      "Antrieb": "Hinterrad, Heckmotor",
       "Getriebe": "5-Gang Handschalter",
-      "Gewicht": "1350 kg"
+      "Gewicht": "1350 kg",
+      "0 auf 100": "5,7 s",
+      "Höchstgeschwindigkeit": "260 km/h",
+      "Bauzeit": "1989–1994"
     },
     "spec": [
       "Luftgekühlt",
@@ -543,7 +826,19 @@
     "splat": null,
     "media": [],
     "accent": "#2f5f4f",
-    "note": "In der Liste stand „G Modell 964“ — das sind zwei Baureihen. Angenommen ist der 964."
+    "note": "In der Liste stand „G Modell 964“ — das sind zwei Baureihen. Angenommen ist der 964.",
+    "shape": {
+      "belt": 0.66,
+      "roofCurve": 0.95,
+      "nose": 0.62,
+      "tail": 0.96,
+      "glass": [
+        0.34,
+        0.47,
+        0.58,
+        0.92
+      ]
+    }
   },
   {
     "id": "t5-v6",
@@ -563,8 +858,13 @@
     "data": {
       "Motor": "3,2 l VR6, Saugmotor",
       "Leistung": "235 PS",
+      "Drehmoment": "315 Nm",
+      "Antrieb": "Front- oder Allrad",
       "Getriebe": "6-Gang Automatik",
-      "Gewicht": "2200 kg"
+      "Gewicht": "2200 kg",
+      "0 auf 100": "9,9 s",
+      "Höchstgeschwindigkeit": "206 km/h",
+      "Bauzeit": "2003–2009"
     },
     "spec": [
       "Platz für alles",
@@ -595,8 +895,13 @@
     "data": {
       "Motor": "TODO: Motorisierung von Nico",
       "Leistung": "TODO",
-      "Getriebe": "Automatik",
-      "Gewicht": "ca. 2400 kg"
+      "Drehmoment": "TODO",
+      "Antrieb": "Allrad",
+      "Getriebe": "9-Gang Automatik",
+      "Gewicht": "ca. 2400 kg",
+      "0 auf 100": "TODO",
+      "Höchstgeschwindigkeit": "220 km/h",
+      "Bauzeit": "seit 2023"
     },
     "spec": [
       "Lounge-Bestuhlung"
@@ -605,7 +910,7 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#101216",
+    "accent": "#2c3138",
     "note": "Alternative zum T5 V6."
   },
   {
@@ -624,10 +929,15 @@
       "wheelbase": 2.63
     },
     "data": {
-      "Motor": "4G63, 2,0 l Turbo",
+      "Motor": "4G63, 2,0 l Vierzylinder, Turbo",
       "Leistung": "280 PS",
-      "Getriebe": "5-Gang Handschalter",
-      "Gewicht": "1400 kg"
+      "Drehmoment": "400 Nm",
+      "Antrieb": "Allrad",
+      "Getriebe": "5- oder 6-Gang Handschalter",
+      "Gewicht": "1400 kg",
+      "0 auf 100": "4,9 s",
+      "Höchstgeschwindigkeit": "250 km/h",
+      "Bauzeit": "2005–2007"
     },
     "spec": [
       "Allrad",
@@ -639,7 +949,20 @@
     "splat": null,
     "media": [],
     "accent": "#cfd4d8",
-    "note": "TODO: Welche Evo-Generation?"
+    "note": "TODO: Welche Evo-Generation?",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.3,
+      "nose": 0.8,
+      "tail": 0.88,
+      "glass": [
+        0.36,
+        0.5,
+        0.74,
+        0.87
+      ]
+    },
+    "wing": true
   },
   {
     "id": "996-c4s",
@@ -657,10 +980,15 @@
       "wheelbase": 2.35
     },
     "data": {
-      "Motor": "3,6 l Boxer, Saugmotor",
+      "Motor": "3,6 l Sechszylinder-Boxer, Saugmotor",
       "Leistung": "320 PS",
+      "Drehmoment": "370 Nm",
+      "Antrieb": "Allrad, Heckmotor",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1550 kg"
+      "Gewicht": "1550 kg",
+      "0 auf 100": "5,1 s",
+      "Höchstgeschwindigkeit": "280 km/h",
+      "Bauzeit": "2001–2005"
     },
     "spec": [
       "Allrad",
@@ -671,7 +999,19 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#6f7378"
+    "accent": "#6f7378",
+    "shape": {
+      "belt": 0.66,
+      "roofCurve": 0.92,
+      "nose": 0.66,
+      "tail": 0.97,
+      "glass": [
+        0.33,
+        0.46,
+        0.58,
+        0.93
+      ]
+    }
   },
   {
     "id": "v12-vantage",
@@ -689,10 +1029,15 @@
       "wheelbase": 2.6
     },
     "data": {
-      "Motor": "5,9 l V12 Saugmotor",
+      "Motor": "5,9 l V12, Saugmotor",
       "Leistung": "517 PS",
+      "Drehmoment": "570 Nm",
+      "Antrieb": "Hinterrad",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1680 kg"
+      "Gewicht": "1680 kg",
+      "0 auf 100": "4,2 s",
+      "Höchstgeschwindigkeit": "305 km/h",
+      "Bauzeit": "2009–2013"
     },
     "spec": [
       "V12 im kleinen Vantage",
@@ -702,8 +1047,20 @@
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#1f3a2e",
-    "note": "Einen V10 Vantage gab es nie. 2012 plus Handschalter ergibt den V12 Vantage."
+    "accent": "#2c5344",
+    "note": "Einen V10 Vantage gab es nie. 2012 plus Handschalter ergibt den V12 Vantage.",
+    "shape": {
+      "belt": 0.66,
+      "roofCurve": 0.7,
+      "nose": 0.72,
+      "tail": 0.9,
+      "glass": [
+        0.4,
+        0.54,
+        0.68,
+        0.9
+      ]
+    }
   },
   {
     "id": "rs4-diesel",
@@ -723,8 +1080,13 @@
     "data": {
       "Motor": "TODO: von Nico",
       "Leistung": "TODO",
+      "Drehmoment": "TODO",
+      "Antrieb": "Allrad (quattro)",
       "Getriebe": "TODO",
-      "Gewicht": "1650 kg"
+      "Gewicht": "1650 kg",
+      "0 auf 100": "TODO",
+      "Höchstgeschwindigkeit": "TODO",
+      "Bauzeit": "TODO"
     },
     "spec": [
       "quattro"
@@ -734,7 +1096,19 @@
     "splat": null,
     "media": [],
     "accent": "#6b6f74",
-    "note": "TODO: Einen Diesel-RS4 gab es ab Werk nicht. Umbauprojekt oder anderes Auto?"
+    "note": "TODO: Einen Diesel-RS4 gab es ab Werk nicht. Umbauprojekt oder anderes Auto?",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.35,
+      "nose": 0.82,
+      "tail": 0.9,
+      "glass": [
+        0.36,
+        0.5,
+        0.74,
+        0.88
+      ]
+    }
   },
   {
     "id": "e30-m3",
@@ -752,10 +1126,15 @@
       "wheelbase": 2.56
     },
     "data": {
-      "Motor": "S14, 2,3 l Vierzylinder Saugmotor",
+      "Motor": "S14, 2,3 l Vierzylinder, Saugmotor",
       "Leistung": "215 PS",
+      "Drehmoment": "230 Nm",
+      "Antrieb": "Hinterrad",
       "Getriebe": "5-Gang Handschalter",
-      "Gewicht": "1200 kg"
+      "Gewicht": "1200 kg",
+      "0 auf 100": "6,7 s",
+      "Höchstgeschwindigkeit": "248 km/h",
+      "Bauzeit": "1986–1991"
     },
     "spec": [
       "S14",
@@ -767,6 +1146,19 @@
     "splat": null,
     "media": [],
     "accent": "#0066b1",
-    "note": "Von Nico als „wenn machbar“ markiert."
+    "note": "Von Nico als „wenn machbar“ markiert.",
+    "shape": {
+      "belt": 0.68,
+      "roofCurve": 0.15,
+      "nose": 0.86,
+      "tail": 0.9,
+      "glass": [
+        0.36,
+        0.5,
+        0.74,
+        0.86
+      ]
+    },
+    "wing": true
   }
 ]

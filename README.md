@@ -86,12 +86,26 @@ Sektion 3. Umsortieren heißt: eine Zahl ändern.
 Stand: 24 Einträge, 12 auf Stellplätzen, 12 auf der Warteliste. Die Auswahl,
 welche zwölf in der Halle stehen, ist meine und nicht abgestimmt.
 
-Nur der Cayman S (981) steht auf `"status": "owned"`, weil das Briefing ihn
-so markiert hat. Alle anderen sind `wishlist`. Welche Autos tatsächlich in
-der Garage stehen, ist offen.
+Keines der Autos ist vorhanden, alle stehen auf `wishlist`. Deshalb werden
+sie lackiert dargestellt und nicht als Drahtgitter — zwölf Gitterkörper
+wären eine Geisterhalle. Die Unterscheidung „belegt gegen Wunsch" wird erst
+wieder sichtbar, wenn tatsächlich ein Auto in der Garage steht.
+
+Ziel der 3D-Darstellung ist, dass man jedes Auto **grob** an seiner
+Silhouette erkennt, nicht mehr. Die vollständigen Daten stehen im Panel und
+müssen in der Szene nicht ablesbar sein.
+
+`npm run profiles` zeichnet alle Seitenansichten als SVG nach
+`public/_profiles.svg`. Das ist der schnellste Weg, eine Silhouette
+nachzujustieren — flach prüfen statt jedes Mal die 3D-Szene laden.
 
 Technische Werte stammen nicht von Nico oder Lion. Wo etwas unklar war,
 steht ein `note`-Feld im Eintrag; das erscheint auch im Panel.
+
+Jedes Auto kann die Werte seiner Bauform über `shape` überschreiben:
+`belt` (Höhe der Gürtellinie), `roofCurve` (Wölbung der Dachlinie, hoch
+beim 911, fast null beim E30), `nose`, `tail` und die vier Längsmarken des
+Dachhauses. `wing: true` setzt einen festen Heckflügel.
 
 Bauformen für `body`: `coupe`, `roadster`, `hatch`, `sedan`, `wagon`, `suv`,
 `van`. Sobald ein `model3d` oder `splat` hinterlegt ist, ersetzt es die

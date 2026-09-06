@@ -1,63 +1,72 @@
 /**
- * Zeichnet die Seitenprofile aller Bauformen als SVG nach
- * public/_profiles.html. Zum Nachjustieren der Proportionen in
- * lib/carGeometry.ts, wenn eine Bauform nicht sitzt.
+ * Zeichnet die Seitenansicht jedes Autos aus content/cars.json als SVG.
  *
- *   npm run profiles   ->   http://localhost:3000/_profiles.html
+ * Die Silhouette ist das, woran man ein Auto grob erkennt. Sie hier flach
+ * zu prüfen geht schneller als jedes Mal die 3D-Szene zu laden.
+ *
+ *   npm run profiles   ->   public/_profiles.svg und public/_profiles.html
  */
 import { writeFileSync } from "node:fs";
 import { buildCarGeometry } from "../lib/carGeometry.ts";
 import type { Car } from "../lib/cars.ts";
+import cars from "../content/cars.json" with { type: "json" };
 
-const base = {
-  id: "x", slot: 1, status: "owned", make: "", model: "", year: 2020,
-  owner: "both", data: {}, spec: [], why: "", model3d: null, splat: null,
-  media: [], accent: "#c8102e",
-} as unknown as Car;
+const SCALE = 96; // Pixel pro Meter
+const COLUMNS = 3;
+const CELL_W = 560;
+const CELL_H = 230;
+const BASE_Y = 176; // Fahrbahn innerhalb der Zelle
 
-const probes: { body: Car["body"]; dim: Car["dimensions"] }[] = [
-  { body: "coupe", dim: { length: 4.38, width: 1.8, height: 1.29, wheelbase: 2.48 } },
-  { body: "roadster", dim: { length: 4.1, width: 1.75, height: 1.25, wheelbase: 2.4 } },
-  { body: "hatch", dim: { length: 4.0, width: 1.75, height: 1.42, wheelbase: 2.5 } },
-  { body: "sedan", dim: { length: 4.36, width: 1.68, height: 1.37, wheelbase: 2.56 } },
-  { body: "wagon", dim: { length: 4.75, width: 1.82, height: 1.47, wheelbase: 2.75 } },
-  { body: "suv", dim: { length: 4.6, width: 1.9, height: 1.68, wheelbase: 2.7 } },
-];
+const list = cars as unknown as Car[];
 
-const SCALE = 150;
-const cards = probes.map(({ body, dim }) => {
-  const car = { ...base, body, dimensions: dim };
+function card(car: Car, index: number) {
   const g = buildCarGeometry(car);
-  // Profile über die Extrusionsparameter zurückholen: wir bauen sie erneut.
-  const w = dim.length * SCALE + 60;
-  const h = dim.height * SCALE + 90;
+  const { length, width, height } = car.dimensions;
+  const ox = (index % COLUMNS) * CELL_W;
+  const oy = Math.floor(index / COLUMNS) * CELL_H;
+  const cx = ox + CELL_W / 2;
 
-  const path = (pts: { x: number; y: number }[]) =>
-    pts.map((p, i) => `${i ? "L" : "M"}${(p.x + dim.length / 2) * SCALE + 30},${h - 40 - p.y * SCALE}`).join(" ") + " Z";
+  // Fahrzeugmitte auf Zellenmitte, Boden auf BASE_Y.
+  const px = (x: number) => cx + x * SCALE;
+  const py = (y: number) => oy + BASE_Y - y * SCALE;
+  const path = (points: { x: number; y: number }[]) =>
+    points.map((p, i) => `${i ? "L" : "M"}${px(p.x).toFixed(1)},${py(p.y).toFixed(1)}`).join(" ") + " Z";
 
-  const shapes = {
-    body: g.__shapes.body.getPoints(40),
-    roof: g.__shapes.roof.getPoints(40),
-    glass: g.__shapes.glass.getPoints(40),
-  };
-  const wheelY = h - 40 - g.wheel.radius * SCALE;
-  const wheels = [-1, 1].map((s) =>
-    `<circle cx="${(s * g.wheel.axleX + dim.length / 2) * SCALE + 30}" cy="${wheelY}" r="${g.wheel.radius * SCALE}" fill="#151517" stroke="#4a4a52"/>` +
-    `<circle cx="${(s * g.wheel.axleX + dim.length / 2) * SCALE + 30}" cy="${wheelY}" r="${g.wheel.radius * 0.62 * SCALE}" fill="#8b8b92"/>`,
-  ).join("");
+  const { radius, axleX } = g.wheel;
+  const wheels = [-axleX, axleX]
+    .map((x) => `<circle cx="${px(x).toFixed(1)}" cy="${py(radius).toFixed(1)}" r="${(radius * SCALE).toFixed(1)}" fill="#121214" stroke="#3a3a40" stroke-width="1"/>
+      <circle cx="${px(x).toFixed(1)}" cy="${py(radius).toFixed(1)}" r="${(radius * 0.62 * SCALE).toFixed(1)}" fill="#6f7076"/>`)
+    .join("");
 
-  return `<figure><figcaption>${body} · ${dim.length} × ${dim.height} m · Radstand ${dim.wheelbase}</figcaption>
-  <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-    <line x1="0" y1="${h - 40}" x2="${w}" y2="${h - 40}" stroke="#333"/>
-    <path d="${path(shapes.body)}" fill="#c8102e"/>
-    <path d="${path(shapes.roof)}" fill="#e03a54"/>
-    <path d="${path(shapes.glass)}" fill="#151a21"/>
+  const wing = car.wing
+    ? `<rect x="${px(g.anchors.rear + 0.35).toFixed(1)}" y="${py(g.anchors.belt + 0.28).toFixed(1)}" width="${(0.3 * SCALE).toFixed(1)}" height="${(0.04 * SCALE).toFixed(1)}" fill="#1b1b1f"/>
+       <rect x="${px(g.anchors.rear + 0.48).toFixed(1)}" y="${py(g.anchors.belt + 0.26).toFixed(1)}" width="4" height="${(0.24 * SCALE).toFixed(1)}" fill="#1b1b1f"/>`
+    : "";
+
+  return `<g>
+    <line x1="${ox + 24}" y1="${oy + BASE_Y}" x2="${ox + CELL_W - 24}" y2="${oy + BASE_Y}" stroke="#2a2a2f" stroke-width="1"/>
     ${wheels}
-  </svg></figure>`;
-}).join("\n");
+    <path d="${path(g.__shapes.body.getPoints(64))}" fill="${car.accent}" stroke="#00000055" stroke-width="1"/>
+    <path d="${path(g.__shapes.roof.getPoints(64))}" fill="${car.accent}" stroke="#00000055" stroke-width="1"/>
+    <path d="${path(g.__shapes.glass.getPoints(64))}" fill="#151a21"/>
+    ${wing}
+    <text x="${ox + 24}" y="${oy + 30}" fill="#e8e8e6" font-family="system-ui, sans-serif" font-size="15" font-weight="600">${car.make} ${car.model}</text>
+    <text x="${ox + 24}" y="${oy + 50}" fill="#8a8a90" font-family="system-ui, sans-serif" font-size="11" letter-spacing="1.2">${car.body.toUpperCase()} · ${length.toFixed(2)} × ${width.toFixed(2)} × ${height.toFixed(2)} M${car.slot ? ` · PLATZ ${String(car.slot).padStart(2, "0")}` : " · WARTELISTE"}</text>
+  </g>`;
+}
 
-writeFileSync("./public/_profiles.html", `<!doctype html><meta charset="utf-8">
-<style>body{background:#0a0a0b;color:#e8e8e6;font:13px system-ui;margin:0;padding:20px}
-figure{margin:0 0 24px}figcaption{text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:#7d7d82;margin-bottom:6px}</style>
-${cards}`);
-console.log("geschrieben: public/_profiles.html");
+const rows = Math.ceil(list.length / COLUMNS);
+const w = COLUMNS * CELL_W;
+const h = rows * CELL_H;
+
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
+<rect width="${w}" height="${h}" fill="#0a0a0b"/>
+${list.map(card).join("\n")}
+</svg>`;
+
+writeFileSync("public/_profiles.svg", svg);
+writeFileSync(
+  "public/_profiles.html",
+  `<!doctype html><meta charset="utf-8"><title>Silhouetten</title><body style="margin:0;background:#0a0a0b">${svg}</body>`,
+);
+console.log(`${list.length} Silhouetten -> public/_profiles.svg`);

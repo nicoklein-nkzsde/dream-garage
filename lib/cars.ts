@@ -1,5 +1,6 @@
 import carsData from "@/content/cars.json";
 import { SLOTS, type Slot } from "./hall";
+import type { Proportions } from "./carGeometry";
 
 export type BodyType =
   | "coupe"
@@ -35,6 +36,10 @@ export type Car = {
   splat: string | null;
   media: string[];
   accent: string;
+  /** Feinabstimmung der Silhouette, überschreibt die Werte der Bauform. */
+  shape?: Partial<Proportions>;
+  /** Fester Heckflügel. */
+  wing?: boolean;
   /** Offene Frage zu diesem Eintrag, erscheint im Panel. */
   note?: string;
 };
