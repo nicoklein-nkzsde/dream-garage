@@ -25,7 +25,7 @@ weiter auf `http://localhost:3000`.
 npm run dev     # http://localhost:3000
 npm run build   # Produktionsbuild
 npx eslint .    # Lint
-npx tsc --noEmit
+npx tsc --noEmit  # erst nach einem Build, Next erzeugt die Routentypen
 npm run profiles  # zeichnet alle Bauformen als Seitenprofil
 ```
 

@@ -27,8 +27,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npx tsc --noEmit
       - run: npx eslint .
+      # next build prüft TypeScript selbst und erzeugt dabei erst die
+      # Routentypen, auf die app/layout.tsx zugreift. Ein vorgelagertes
+      # tsc --noEmit läuft deshalb in einem frischen Checkout ins Leere.
       - run: npm run build
       # Ohne diese Datei ignoriert GitHub Pages den Ordner _next.
       - run: touch out/.nojekyll
