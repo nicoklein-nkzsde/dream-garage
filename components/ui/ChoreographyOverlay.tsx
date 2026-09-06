@@ -2,9 +2,9 @@
 
 import FadeRange from "./FadeRange";
 import { HALL, SLOTS } from "@/lib/hall";
-import { CARS } from "@/lib/cars";
+import { PLACED } from "@/lib/cars";
 
-const owned = CARS.filter((car) => car.status === "owned").length;
+const filled = PLACED.length;
 
 /**
  * Die HTML-Ebene über der Fahrt. Alles hängt an p, nichts an eigenen
@@ -48,7 +48,7 @@ export default function ChoreographyOverlay() {
           Traufe {HALL.eaves.toFixed(2).replace(".", ",")} m
         </p>
         <p className="tech-label mt-1">
-          {SLOTS.length} Stellplätze &middot; {owned} belegt
+          {SLOTS.length} Stellplätze &middot; {filled} vergeben
         </p>
       </FadeRange>
 

@@ -36,6 +36,8 @@ const PROPORTIONS: Record<BodyType, Proportions> = {
   sedan: { belt: 0.56, wheel: 0.25, roof: 1, glass: [0.36, 0.52, 0.72, 0.85] },
   wagon: { belt: 0.55, wheel: 0.25, roof: 1, glass: [0.35, 0.51, 0.92, 0.98] },
   suv: { belt: 0.58, wheel: 0.28, roof: 1, glass: [0.34, 0.48, 0.84, 0.95] },
+  // Bus: Scheibe weit vorn und steil, Dach fast über die ganze Länge.
+  van: { belt: 0.45, wheel: 0.2, roof: 1, glass: [0.2, 0.33, 0.93, 0.99] },
 };
 
 const BEVEL = 0.03;

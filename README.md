@@ -66,16 +66,23 @@ Offen, bewusst noch nicht angefasst (Phasen 2 bis 6):
 
 ### Fahrzeugdaten
 
-`content/cars.json` enthält bisher nur die zwei Autos, die als Beispiel im
-Briefing stehen. Sie liegen auf Platz 9 und 10, weil das die beiden Plätze
-sind, die man beim Ankommen in der Halle vor sich hat — die Briefing-Plätze
-1 und 7 liegen ganz links außerhalb des Blickfelds. Die technischen Werte
-stammen nicht von Nico oder Lion und müssen gegengelesen werden.
-Zehn Plätze sind leer.
+`content/cars.json` ist die einzige Quelle. Ein Eintrag mit `slot` steht in
+der Halle, ein Eintrag mit `"slot": null` landet auf der Warteliste unter
+Sektion 3. Umsortieren heißt: eine Zahl ändern.
 
-Bauformen für `body`: `coupe`, `roadster`, `hatch`, `sedan`, `wagon`, `suv`.
-Sobald ein `model3d` oder `splat` hinterlegt ist, ersetzt es die gerechnete
-Geometrie, ohne dass sich sonst etwas ändert.
+Stand: 24 Einträge, 12 auf Stellplätzen, 12 auf der Warteliste. Die Auswahl,
+welche zwölf in der Halle stehen, ist meine und nicht abgestimmt.
+
+Nur der Cayman S (981) steht auf `"status": "owned"`, weil das Briefing ihn
+so markiert hat. Alle anderen sind `wishlist`. Welche Autos tatsächlich in
+der Garage stehen, ist offen.
+
+Technische Werte stammen nicht von Nico oder Lion. Wo etwas unklar war,
+steht ein `note`-Feld im Eintrag; das erscheint auch im Panel.
+
+Bauformen für `body`: `coupe`, `roadster`, `hatch`, `sedan`, `wagon`, `suv`,
+`van`. Sobald ein `model3d` oder `splat` hinterlegt ist, ersetzt es die
+gerechnete Geometrie, ohne dass sich sonst etwas ändert.
 
 ### Abweichungen vom Briefing
 

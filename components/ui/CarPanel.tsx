@@ -47,8 +47,10 @@ export default function CarPanel() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="tech-label">
-                Stellplatz {String(car.slot).padStart(2, "0")} &middot;{" "}
-                {car.status === "owned" ? "Belegt" : "Wunsch"}
+                {car.slot
+                  ? `Stellplatz ${String(car.slot).padStart(2, "0")}`
+                  : "Warteliste"}{" "}
+                &middot; {car.status === "owned" ? "Belegt" : "Wunsch"}
               </p>
               <h2 className="font-tech mt-2 text-3xl leading-none uppercase">
                 {car.make}
@@ -101,6 +103,12 @@ export default function CarPanel() {
           )}
 
           <p className="mt-6 text-sm leading-relaxed text-muted">{car.why}</p>
+
+          {car.note && (
+            <p className="mt-6 border-l-2 border-accent pl-3 text-sm text-muted">
+              {car.note}
+            </p>
+          )}
 
           {!car.model3d && !car.splat && (
             <p className="tech-label mt-8 border-t border-line pt-4">

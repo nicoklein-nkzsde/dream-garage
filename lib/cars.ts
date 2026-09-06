@@ -7,11 +7,13 @@ export type BodyType =
   | "hatch"
   | "sedan"
   | "wagon"
-  | "suv";
+  | "suv"
+  | "van";
 
 export type Car = {
   id: string;
-  slot: number;
+  /** Stellplatz 1–12, oder null für die Warteliste. */
+  slot: number | null;
   status: "owned" | "wishlist";
   make: string;
   model: string;
@@ -33,6 +35,8 @@ export type Car = {
   splat: string | null;
   media: string[];
   accent: string;
+  /** Offene Frage zu diesem Eintrag, erscheint im Panel. */
+  note?: string;
 };
 
 export const CARS = carsData as unknown as Car[];
@@ -40,6 +44,12 @@ export const CARS = carsData as unknown as Car[];
 export function carBySlot(slot: number) {
   return CARS.find((car) => car.slot === slot);
 }
+
+/** Autos aus der Liste, die noch keinen Platz in der Halle haben. */
+export const WAITLIST = CARS.filter((car) => car.slot === null);
+
+/** Autos, die tatsächlich in der Halle stehen. */
+export const PLACED = CARS.filter((car) => car.slot !== null);
 
 export function carById(id: string) {
   return CARS.find((car) => car.id === id);

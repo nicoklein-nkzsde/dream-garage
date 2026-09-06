@@ -48,7 +48,7 @@ export default function Car({ car, rotation }: Props) {
     if (isWish && group.current) {
       // Leichtes Schweben, damit ein Wunschauto nicht wie geparkt wirkt.
       group.current.position.y =
-        WISH_LIFT + Math.sin(scrollState.p * 4 + car.slot) * 0.02;
+        WISH_LIFT + Math.sin(scrollState.p * 4 + (car.slot ?? 0)) * 0.02;
     }
   });
 

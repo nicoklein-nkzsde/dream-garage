@@ -1,6 +1,6 @@
 "use client";
 
-import { SLOTS_WITH_CARS } from "@/lib/cars";
+import { SLOTS_WITH_CARS, WAITLIST } from "@/lib/cars";
 import { selection, useSelectedCarId } from "@/lib/selectionStore";
 
 /**
@@ -65,6 +65,28 @@ export function HallSection() {
           );
         })}
       </ul>
+      {WAITLIST.length > 0 && (
+        <div className="pointer-events-auto mt-16 max-w-3xl">
+          <p className="tech-label">
+            Warteliste &middot; {WAITLIST.length} ohne Stellplatz
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {WAITLIST.map((car) => (
+              <li key={car.id}>
+                <button
+                  type="button"
+                  onClick={() => selection.set(car.id)}
+                  className={`tech-label cursor-pointer border px-3 py-2 text-paper hover:border-accent hover:text-accent ${
+                    car.id === selectedId ? "border-accent" : "border-line"
+                  }`}
+                >
+                  {car.make} {car.model}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }

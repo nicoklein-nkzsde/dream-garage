@@ -1,50 +1,772 @@
 [
   {
+    "id": "elise-s2",
+    "slot": 1,
+    "status": "wishlist",
+    "make": "Lotus",
+    "model": "Elise (S2)",
+    "year": 2004,
+    "owner": "both",
+    "body": "roadster",
+    "dimensions": {
+      "length": 3.79,
+      "width": 1.72,
+      "height": 1.12,
+      "wheelbase": 2.3
+    },
+    "data": {
+      "Motor": "1,8 l Vierzylinder, Saugmotor",
+      "Leistung": "192 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "860 kg"
+    },
+    "spec": [
+      "Handschalter",
+      "Mittelmotor",
+      "Aluminium-Chassis"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#2a7fb8"
+  },
+  {
+    "id": "s2000",
+    "slot": 2,
+    "status": "wishlist",
+    "make": "Honda",
+    "model": "S2000 (AP1)",
+    "year": 2004,
+    "owner": "both",
+    "body": "roadster",
+    "dimensions": {
+      "length": 4.14,
+      "width": 1.75,
+      "height": 1.29,
+      "wheelbase": 2.4
+    },
+    "data": {
+      "Motor": "F20C, 2,0 l Saugmotor",
+      "Leistung": "240 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1260 kg"
+    },
+    "spec": [
+      "Handschalter",
+      "9000 Touren",
+      "Hinterradantrieb"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#e6e6e2"
+  },
+  {
     "id": "cayman-981-s",
-    "slot": 9,
+    "slot": 3,
     "status": "owned",
     "make": "Porsche",
     "model": "Cayman S (981)",
     "year": 2014,
     "owner": "lion",
     "body": "coupe",
-    "dimensions": { "length": 4.38, "width": 1.8, "height": 1.29, "wheelbase": 2.48 },
+    "dimensions": {
+      "length": 4.38,
+      "width": 1.8,
+      "height": 1.29,
+      "wheelbase": 2.48
+    },
     "data": {
       "Motor": "3,4 l Boxer, Saugmotor",
       "Leistung": "325 PS",
       "Getriebe": "6-Gang Handschalter",
-      "Gewicht": "1320 kg",
-      "0 auf 100": "4,7 s"
+      "Gewicht": "1320 kg"
     },
-    "spec": ["Handschalter", "PCCB Keramikbremse", "Vollausstattung"],
-    "why": "TODO: Text von Lion — warum genau dieses Auto.",
+    "spec": [
+      "Handschalter",
+      "PCCB Keramikbremse",
+      "Vollausstattung"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#c8102e"
+    "accent": "#c8102e",
+    "note": "Aus dem Briefing übernommen. Status und Werte bitte bestätigen."
+  },
+  {
+    "id": "1er-m",
+    "slot": 4,
+    "status": "wishlist",
+    "make": "BMW",
+    "model": "1er M Coupé (E82)",
+    "year": 2011,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.38,
+      "width": 1.8,
+      "height": 1.41,
+      "wheelbase": 2.66
+    },
+    "data": {
+      "Motor": "N54, 3,0 l Reihensechser Biturbo",
+      "Leistung": "340 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1495 kg"
+    },
+    "spec": [
+      "Handschalter",
+      "Sperrdifferenzial",
+      "Nur ein Baujahr"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#c85a1e"
+  },
+  {
+    "id": "golf-r32",
+    "slot": 5,
+    "status": "wishlist",
+    "make": "Volkswagen",
+    "model": "Golf R32 (Mk4)",
+    "year": 2003,
+    "owner": "both",
+    "body": "hatch",
+    "dimensions": {
+      "length": 4.15,
+      "width": 1.74,
+      "height": 1.44,
+      "wheelbase": 2.51
+    },
+    "data": {
+      "Motor": "3,2 l VR6, Saugmotor",
+      "Leistung": "241 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1477 kg"
+    },
+    "spec": [
+      "VR6-Sound",
+      "Allrad",
+      "Handschalter"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#1b4fa0",
+    "note": "Alternative aus der Liste: Golf VR6 statt R32."
+  },
+  {
+    "id": "audi-s3-8p",
+    "slot": 6,
+    "status": "wishlist",
+    "make": "Audi",
+    "model": "S3 (8P)",
+    "year": 2009,
+    "owner": "both",
+    "body": "hatch",
+    "dimensions": {
+      "length": 4.29,
+      "width": 1.77,
+      "height": 1.42,
+      "wheelbase": 2.58
+    },
+    "data": {
+      "Motor": "2,0 l TFSI Turbo",
+      "Leistung": "265 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1455 kg"
+    },
+    "spec": [
+      "quattro",
+      "Handschalter"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#9aa0a6"
+  },
+  {
+    "id": "c63-w204",
+    "slot": 7,
+    "status": "wishlist",
+    "make": "Mercedes-AMG",
+    "model": "C 63 (W204)",
+    "year": 2009,
+    "owner": "both",
+    "body": "sedan",
+    "dimensions": {
+      "length": 4.59,
+      "width": 1.77,
+      "height": 1.45,
+      "wheelbase": 2.76
+    },
+    "data": {
+      "Motor": "M156, 6,2 l V8 Saugmotor",
+      "Leistung": "457 PS",
+      "Getriebe": "7-Gang Automatik",
+      "Gewicht": "1730 kg"
+    },
+    "spec": [
+      "V8-Sauger",
+      "Hinterradantrieb"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#14161a",
+    "note": "W203 gab es nur als C 55 AMG, den C 63 erst ab W204."
+  },
+  {
+    "id": "e60-m5",
+    "slot": 8,
+    "status": "wishlist",
+    "make": "BMW",
+    "model": "M5 (E60)",
+    "year": 2007,
+    "owner": "both",
+    "body": "sedan",
+    "dimensions": {
+      "length": 4.86,
+      "width": 1.85,
+      "height": 1.47,
+      "wheelbase": 2.89
+    },
+    "data": {
+      "Motor": "S85, 5,0 l V10 Saugmotor",
+      "Leistung": "507 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1830 kg"
+    },
+    "spec": [
+      "V10",
+      "Handschalter",
+      "8250 Touren"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#4a5560",
+    "note": "Den Handschalter gab es ab Werk nur in den USA."
+  },
+  {
+    "id": "997-gt3",
+    "slot": 9,
+    "status": "wishlist",
+    "make": "Porsche",
+    "model": "911 GT3 (997.1)",
+    "year": 2007,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.45,
+      "width": 1.81,
+      "height": 1.28,
+      "wheelbase": 2.36
+    },
+    "data": {
+      "Motor": "3,6 l Boxer, Saugmotor",
+      "Leistung": "415 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1395 kg"
+    },
+    "spec": [
+      "Handschalter",
+      "Saugmotor",
+      "Einteilige Sitze"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#2f6fbf"
+  },
+  {
+    "id": "f430",
+    "slot": 10,
+    "status": "wishlist",
+    "make": "Ferrari",
+    "model": "F430",
+    "year": 2007,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.51,
+      "width": 1.92,
+      "height": 1.21,
+      "wheelbase": 2.6
+    },
+    "data": {
+      "Motor": "4,3 l V8 Saugmotor",
+      "Leistung": "490 PS",
+      "Getriebe": "6-Gang Handschalter oder F1",
+      "Gewicht": "1450 kg"
+    },
+    "spec": [
+      "V8-Sauger",
+      "Mittelmotor",
+      "E-Diff"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#d4021d"
+  },
+  {
+    "id": "rx7-fd",
+    "slot": 11,
+    "status": "wishlist",
+    "make": "Mazda",
+    "model": "RX-7 (FD3S)",
+    "year": 1998,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.3,
+      "width": 1.76,
+      "height": 1.23,
+      "wheelbase": 2.43
+    },
+    "data": {
+      "Motor": "13B-REW, Zweischeiben-Wankel, Twinturbo",
+      "Leistung": "280 PS",
+      "Getriebe": "5-Gang Handschalter",
+      "Gewicht": "1270 kg"
+    },
+    "spec": [
+      "Wankelmotor",
+      "Handschalter",
+      "Klappscheinwerfer"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#b3121b"
+  },
+  {
+    "id": "350z",
+    "slot": 12,
+    "status": "wishlist",
+    "make": "Nissan",
+    "model": "350Z",
+    "year": 2005,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.31,
+      "width": 1.82,
+      "height": 1.32,
+      "wheelbase": 2.65
+    },
+    "data": {
+      "Motor": "VQ35DE, 3,5 l V6 Saugmotor",
+      "Leistung": "280 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1500 kg"
+    },
+    "spec": [
+      "Handschalter",
+      "Hinterradantrieb"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#d96a1f"
+  },
+  {
+    "id": "cayman-r-987",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Porsche",
+    "model": "Cayman R (987)",
+    "year": 2011,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.35,
+      "width": 1.8,
+      "height": 1.28,
+      "wheelbase": 2.42
+    },
+    "data": {
+      "Motor": "3,4 l Boxer, Saugmotor",
+      "Leistung": "330 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1295 kg"
+    },
+    "spec": [
+      "55 kg leichter",
+      "Tiefergelegt",
+      "Handschalter"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#dcdcd8",
+    "note": "Zweiter Cayman neben dem 981 S. Einer von beiden kann raus."
+  },
+  {
+    "id": "sl-r129",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Mercedes-Benz",
+    "model": "SL (R129)",
+    "year": 1995,
+    "owner": "both",
+    "body": "roadster",
+    "dimensions": {
+      "length": 4.47,
+      "width": 1.81,
+      "height": 1.29,
+      "wheelbase": 2.52
+    },
+    "data": {
+      "Motor": "TODO: Motorisierung von Nico",
+      "Leistung": "TODO",
+      "Getriebe": "Automatik",
+      "Gewicht": "ca. 1800 kg"
+    },
+    "spec": [
+      "Hardtop",
+      "Klappverdeck"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#b6b8bb",
+    "note": "R192 gibt es nicht. Angenommen ist R129 — bitte bestätigen."
+  },
+  {
+    "id": "gr-yaris",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Toyota",
+    "model": "GR Yaris",
+    "year": 2021,
+    "owner": "both",
+    "body": "hatch",
+    "dimensions": {
+      "length": 4.0,
+      "width": 1.81,
+      "height": 1.46,
+      "wheelbase": 2.56
+    },
+    "data": {
+      "Motor": "G16E, 1,6 l Dreizylinder Turbo",
+      "Leistung": "261 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1280 kg"
+    },
+    "spec": [
+      "Allrad",
+      "Handschalter",
+      "Homologationsauto"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#cfd2d6",
+    "note": "Von Nico als eventuell markiert."
+  },
+  {
+    "id": "leon-fr-1m",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Seat",
+    "model": "León FR (1M)",
+    "year": 2004,
+    "owner": "both",
+    "body": "hatch",
+    "dimensions": {
+      "length": 4.18,
+      "width": 1.74,
+      "height": 1.44,
+      "wheelbase": 2.51
+    },
+    "data": {
+      "Motor": "1,8 l Turbo",
+      "Leistung": "180 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1300 kg"
+    },
+    "spec": [
+      "Handschalter"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#c23a2b",
+    "note": "TODO: Benziner 1.8T oder FR TDI?"
+  },
+  {
+    "id": "964",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Porsche",
+    "model": "911 (964)",
+    "year": 1991,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.25,
+      "width": 1.65,
+      "height": 1.31,
+      "wheelbase": 2.27
+    },
+    "data": {
+      "Motor": "3,6 l Boxer, Saugmotor",
+      "Leistung": "250 PS",
+      "Getriebe": "5-Gang Handschalter",
+      "Gewicht": "1350 kg"
+    },
+    "spec": [
+      "Luftgekühlt",
+      "Handschalter"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#2f5f4f",
+    "note": "In der Liste stand „G Modell 964“ — das sind zwei Baureihen. Angenommen ist der 964."
+  },
+  {
+    "id": "t5-v6",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Volkswagen",
+    "model": "T5 Multivan V6",
+    "year": 2005,
+    "owner": "both",
+    "body": "van",
+    "dimensions": {
+      "length": 4.89,
+      "width": 1.9,
+      "height": 1.96,
+      "wheelbase": 3.0
+    },
+    "data": {
+      "Motor": "3,2 l VR6, Saugmotor",
+      "Leistung": "235 PS",
+      "Getriebe": "6-Gang Automatik",
+      "Gewicht": "2200 kg"
+    },
+    "spec": [
+      "Platz für alles",
+      "VR6"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#23303c",
+    "note": "Alternative aus der Liste: V-Klasse Maybach."
+  },
+  {
+    "id": "v-klasse-maybach",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Mercedes-Maybach",
+    "model": "V-Klasse",
+    "year": 2023,
+    "owner": "both",
+    "body": "van",
+    "dimensions": {
+      "length": 5.14,
+      "width": 1.93,
+      "height": 1.9,
+      "wheelbase": 3.2
+    },
+    "data": {
+      "Motor": "TODO: Motorisierung von Nico",
+      "Leistung": "TODO",
+      "Getriebe": "Automatik",
+      "Gewicht": "ca. 2400 kg"
+    },
+    "spec": [
+      "Lounge-Bestuhlung"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#101216",
+    "note": "Alternative zum T5 V6."
+  },
+  {
+    "id": "lancer-evo",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Mitsubishi",
+    "model": "Lancer Evo IX",
+    "year": 2006,
+    "owner": "both",
+    "body": "sedan",
+    "dimensions": {
+      "length": 4.49,
+      "width": 1.77,
+      "height": 1.45,
+      "wheelbase": 2.63
+    },
+    "data": {
+      "Motor": "4G63, 2,0 l Turbo",
+      "Leistung": "280 PS",
+      "Getriebe": "5-Gang Handschalter",
+      "Gewicht": "1400 kg"
+    },
+    "spec": [
+      "Allrad",
+      "Handschalter",
+      "Rallye-Technik"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#cfd4d8",
+    "note": "TODO: Welche Evo-Generation?"
+  },
+  {
+    "id": "996-c4s",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Porsche",
+    "model": "911 Carrera 4S (996)",
+    "year": 2003,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.44,
+      "width": 1.83,
+      "height": 1.31,
+      "wheelbase": 2.35
+    },
+    "data": {
+      "Motor": "3,6 l Boxer, Saugmotor",
+      "Leistung": "320 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1550 kg"
+    },
+    "spec": [
+      "Allrad",
+      "Breite Turbo-Karosserie",
+      "Handschalter"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#6f7378"
+  },
+  {
+    "id": "v12-vantage",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Aston Martin",
+    "model": "V12 Vantage",
+    "year": 2012,
+    "owner": "both",
+    "body": "coupe",
+    "dimensions": {
+      "length": 4.39,
+      "width": 1.87,
+      "height": 1.24,
+      "wheelbase": 2.6
+    },
+    "data": {
+      "Motor": "5,9 l V12 Saugmotor",
+      "Leistung": "517 PS",
+      "Getriebe": "6-Gang Handschalter",
+      "Gewicht": "1680 kg"
+    },
+    "spec": [
+      "V12 im kleinen Vantage",
+      "Handschalter"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#1f3a2e",
+    "note": "Einen V10 Vantage gab es nie. 2012 plus Handschalter ergibt den V12 Vantage."
+  },
+  {
+    "id": "rs4-diesel",
+    "slot": null,
+    "status": "wishlist",
+    "make": "Audi",
+    "model": "RS4 (B7)",
+    "year": 2007,
+    "owner": "both",
+    "body": "sedan",
+    "dimensions": {
+      "length": 4.59,
+      "width": 1.82,
+      "height": 1.42,
+      "wheelbase": 2.65
+    },
+    "data": {
+      "Motor": "TODO: von Nico",
+      "Leistung": "TODO",
+      "Getriebe": "TODO",
+      "Gewicht": "1650 kg"
+    },
+    "spec": [
+      "quattro"
+    ],
+    "why": "TODO: Text von Nico — warum genau dieses Auto.",
+    "model3d": null,
+    "splat": null,
+    "media": [],
+    "accent": "#6b6f74",
+    "note": "TODO: Einen Diesel-RS4 gab es ab Werk nicht. Umbauprojekt oder anderes Auto?"
   },
   {
     "id": "e30-m3",
-    "slot": 10,
+    "slot": null,
     "status": "wishlist",
     "make": "BMW",
     "model": "M3 (E30)",
     "year": 1990,
     "owner": "both",
     "body": "sedan",
-    "dimensions": { "length": 4.36, "width": 1.68, "height": 1.37, "wheelbase": 2.56 },
+    "dimensions": {
+      "length": 4.36,
+      "width": 1.68,
+      "height": 1.37,
+      "wheelbase": 2.56
+    },
     "data": {
-      "Motor": "S14, 2,3 l Vierzylinder",
+      "Motor": "S14, 2,3 l Vierzylinder Saugmotor",
       "Leistung": "215 PS",
       "Getriebe": "5-Gang Handschalter",
-      "Gewicht": "1200 kg",
-      "Preisspanne": "TODO: von Nico"
+      "Gewicht": "1200 kg"
     },
-    "spec": ["S14", "Handschalter"],
+    "spec": [
+      "S14",
+      "Handschalter",
+      "Kastenverbreiterung"
+    ],
     "why": "TODO: Text von Nico — warum genau dieses Auto.",
     "model3d": null,
     "splat": null,
     "media": [],
-    "accent": "#0066b1"
+    "accent": "#0066b1",
+    "note": "Von Nico als „wenn machbar“ markiert."
   }
 ]
