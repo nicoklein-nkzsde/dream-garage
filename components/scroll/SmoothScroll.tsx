@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { setProgress } from "./scrollState";
 import { CHOREOGRAPHY_ID } from "./constants";
+import { selection } from "@/lib/selectionStore";
 import { REDUCED_MOTION_STOPS } from "@/lib/cameraPath";
 
 /** Nachlauf des Scrubs in Sekunden. Briefing Abschnitt 4. */
@@ -38,6 +39,7 @@ export default function SmoothScroll() {
         const target = window as unknown as Record<string, unknown>;
         target.__lenis = lenis;
         target.__setProgress = setProgress;
+        target.__select = (id: string | null) => selection.set(id);
       }
     }
 

@@ -23,7 +23,7 @@ const POSITIONS: [number, number, number][] = [
   [0, 38, 12], // p 0.25  leichtes Kippen, erste Tiefe
   [0, 24, 22], // p 0.50  halbhoch, Dachkonstruktion kommt ins Bild
   [0, 10, 22], // p 0.75  fast auf Höhe, vor dem Tor
-  [0, 1.65, 6], // p 1.00  Augenhöhe, Tor im Rücken
+  [0, 1.65, 6.5], // p 1.00  Augenhöhe, Tor im Rücken
 ];
 
 const TARGETS: [number, number, number][] = [
@@ -31,7 +31,7 @@ const TARGETS: [number, number, number][] = [
   [0, 0, 1],
   [0, 2, 2],
   [0, 2, -2],
-  [0, 1.65, -10],
+  [0, 1.65, -12],
 ];
 
 const FOV_START = 35; // Draufsicht, wirkt technisch

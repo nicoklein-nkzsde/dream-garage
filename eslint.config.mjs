@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Reines Entwicklungswerkzeug, läuft über Nodes Type-Stripping.
+    "scripts/**",
   ]),
   {
     // React Three Fiber schreibt in useFrame absichtlich direkt auf Objekte

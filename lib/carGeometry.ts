@@ -42,9 +42,14 @@ const BEVEL = 0.03;
 
 export type CarGeometry = {
   body: ExtrudeGeometry;
+  /** Dachhaus in Wagenfarbe. */
+  roof: ExtrudeGeometry;
+  /** Verglasung, etwas breiter eingesetzt, damit Säulen stehen bleiben. */
   glass: ExtrudeGeometry;
   wheel: { radius: number; width: number; axleX: number; offsetZ: number };
   height: number;
+  /** Nur für die Profilkontrolle in der Entwicklung. */
+  __shapes: { body: Shape; roof: Shape; glass: Shape };
 };
 
 export function buildCarGeometry(car: Car): CarGeometry {
@@ -80,16 +85,30 @@ export function buildCarGeometry(car: Car): CarGeometry {
   body.quadraticCurveTo(rear, clearance, rear + 0.06, clearance);
 
   const roofY = height * shape.roof;
+
+  const roof = new Shape();
+  roof.moveTo(wsBase, belt - 0.02);
+  roof.lineTo(roofFront, roofY);
+  roof.lineTo(roofRear, roofY);
+  roof.lineTo(backBase, belt - 0.02);
+  roof.lineTo(wsBase, belt - 0.02);
+
+  // Dieselbe Form nach innen versetzt. Was stehen bleibt, sind A-, B- und
+  // C-Säule plus Dachkante — ohne das wirkt ein Auto wie ein Keil.
+  const inset = 0.09;
   const glass = new Shape();
-  glass.moveTo(wsBase, belt - 0.02);
-  glass.lineTo(roofFront, roofY);
-  glass.lineTo(roofRear, roofY);
-  glass.lineTo(backBase, belt - 0.02);
-  glass.lineTo(wsBase, belt - 0.02);
+  glass.moveTo(wsBase - inset * 1.4, belt + 0.04);
+  glass.lineTo(roofFront - inset, roofY - inset * 0.8);
+  glass.lineTo(roofRear + inset, roofY - inset * 0.8);
+  glass.lineTo(backBase + inset * 1.6, belt + 0.04);
+  glass.lineTo(wsBase - inset * 1.4, belt + 0.04);
 
   return {
     body: extrude(body, width - 2 * BEVEL),
-    glass: extrude(glass, width * 0.84 - 2 * BEVEL),
+    roof: extrude(roof, width * 0.84 - 2 * BEVEL),
+    // Etwas breiter als das Dachhaus, sonst verschwindet die Scheibe darin.
+    glass: extrude(glass, width * 0.86),
+    __shapes: { body, roof, glass },
     wheel: {
       radius: wheelRadius,
       width: width * 0.13,

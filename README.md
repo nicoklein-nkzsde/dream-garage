@@ -13,7 +13,12 @@ npm run dev     # http://localhost:3000
 npm run build   # Produktionsbuild
 npx eslint .    # Lint
 npx tsc --noEmit
+npm run profiles  # zeichnet alle Bauformen als Seitenprofil
 ```
+
+`npm run profiles` schreibt `public/_profiles.html`. Die Seite zeigt jede
+Bauform in Originalproportionen als SVG — der schnellste Weg, die Werte in
+`lib/carGeometry.ts` nachzujustieren. Die Datei ist nicht eingecheckt.
 
 Node wurde über Homebrew installiert (`brew install node`).
 
@@ -62,9 +67,11 @@ Offen, bewusst noch nicht angefasst (Phasen 2 bis 6):
 ### Fahrzeugdaten
 
 `content/cars.json` enthält bisher nur die zwei Autos, die als Beispiel im
-Briefing stehen: Cayman S (981) auf Platz 1 und E30 M3 auf Platz 7. Die
-technischen Werte dort stammen nicht von Nico oder Lion und müssen
-gegengelesen werden. Zehn Plätze sind noch leer.
+Briefing stehen. Sie liegen auf Platz 9 und 10, weil das die beiden Plätze
+sind, die man beim Ankommen in der Halle vor sich hat — die Briefing-Plätze
+1 und 7 liegen ganz links außerhalb des Blickfelds. Die technischen Werte
+stammen nicht von Nico oder Lion und müssen gegengelesen werden.
+Zehn Plätze sind leer.
 
 Bauformen für `body`: `coupe`, `roadster`, `hatch`, `sedan`, `wagon`, `suv`.
 Sobald ein `model3d` oder `splat` hinterlegt ist, ersetzt es die gerechnete
@@ -80,7 +87,11 @@ Geometrie, ohne dass sich sonst etwas ändert.
 2. **Länge der Halle liegt auf der X-Achse.** Nur so passt der Grundriss bei
    FOV 35 aus 45 m Höhe vollständig ins Bild. Die Torwand ist damit die
    Längswand, wie im Briefing beschrieben.
-3. **Kadrierung der Draufsicht.** Ein Versatz von 1,5 m nach oben plus etwas
+3. **Lage der Stellplätze.** Beide Reihen liegen in der hinteren
+   Hallenhälfte, davor bleibt die Einfahrtsfläche frei. Standen sie
+   symmetrisch um die Hallenmitte, war beim Ankommen die halbe Sammlung
+   hinter dem Besucher. Werte oben in `lib/hall.ts`.
+4. **Kadrierung der Draufsicht.** Ein Versatz von 1,5 m nach oben plus etwas
    Rand, damit unten links Platz für den Titel bleibt. Konstanten oben in
    `components/scene/CameraRig.tsx`.
 

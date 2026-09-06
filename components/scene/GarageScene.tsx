@@ -24,6 +24,10 @@ export default function GarageScene() {
           // Nur im Dev-Build, damit sich der Canvas auslesen lässt.
           preserveDrawingBuffer: process.env.NODE_ENV !== "production",
         }}
+        // Etwas unter 1: die Halle soll dunkel bleiben, nicht ausgewaschen.
+        onCreated={({ gl }) => {
+          gl.toneMappingExposure = 0.9;
+        }}
         camera={{ fov: 35, near: 0.1, far: 400, position: [0, 45, 0.1] }}
         // Klick ins Leere schließt das Panel wieder.
         onPointerMissed={() => selection.set(null)}

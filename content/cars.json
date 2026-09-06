@@ -1,7 +1,7 @@
 [
   {
     "id": "cayman-981-s",
-    "slot": 1,
+    "slot": 9,
     "status": "owned",
     "make": "Porsche",
     "model": "Cayman S (981)",
@@ -25,7 +25,7 @@
   },
   {
     "id": "e30-m3",
-    "slot": 7,
+    "slot": 10,
     "status": "wishlist",
     "make": "BMW",
     "model": "M3 (E30)",

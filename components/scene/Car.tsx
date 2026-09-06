@@ -10,7 +10,7 @@ import { scrollState } from "@/components/scroll/scrollState";
 
 const TYRE = "#111113";
 const RIM = "#8b8b92";
-const GLASS = "#0b0d10";
+const GLASS = "#151a21";
 
 /** Wunschautos schweben als Drahtgitter über dem leeren Platz. */
 const WISH_LIFT = 0.28;
@@ -30,6 +30,7 @@ export default function Car({ car, rotation }: Props) {
   useEffect(() => {
     return () => {
       geometry.body.dispose();
+      geometry.roof.dispose();
       geometry.glass.dispose();
     };
   }, [geometry]);
@@ -92,16 +93,31 @@ export default function Car({ car, rotation }: Props) {
           />
         </mesh>
 
-        <mesh geometry={geometry.glass}>
+        {/* Dachhaus in Wagenfarbe … */}
+        <mesh geometry={geometry.roof}>
           <meshPhysicalMaterial
-            color={isWish ? car.accent : GLASS}
-            metalness={isWish ? 0 : 0.2}
-            roughness={isWish ? 1 : 0.12}
+            color={car.accent}
+            metalness={isWish ? 0 : 0.55}
+            roughness={isWish ? 1 : 0.32}
+            clearcoat={isWish ? 0 : 1}
+            clearcoatRoughness={0.06}
             wireframe={isWish}
             transparent={isWish}
-            opacity={isWish ? 0.4 : 1}
+            opacity={isWish ? 0.5 : 1}
           />
         </mesh>
+
+        {/* … und die eingesetzte Verglasung. */}
+        {!isWish && (
+          <mesh geometry={geometry.glass}>
+            <meshPhysicalMaterial
+              color={GLASS}
+              metalness={0.85}
+              roughness={0.06}
+              clearcoat={1}
+            />
+          </mesh>
+        )}
 
         {!isWish &&
           [-1, 1].map((front) =>

@@ -43,8 +43,11 @@ export const CAR_BOX = { width: 1.85, height: 1.28, length: 4.4 } as const;
 
 // Drei Plätze links, drei rechts der Einfahrt, in zwei Reihen.
 const COLUMNS = [-16.2, -10.8, -5.4, 5.4, 10.8, 16.2];
-const ROW_GATE = 6.9; // Reihe an der Torwand
-const ROW_BACK = -6.9; // Reihe an der Werkbankwand
+// Beide Reihen liegen in der hinteren Hallenhälfte. Wer durch das Tor
+// hereinfährt, hat sie damit vor sich und nicht im Rücken. Davor bleibt
+// die Einfahrtsfläche frei.
+const ROW_GATE = 2.5;
+const ROW_BACK = -7.4;
 
 export const SLOTS: Slot[] = [
   // Reihe an der Torwand, Nummern 1–6. Nase zur Mittelgasse.
