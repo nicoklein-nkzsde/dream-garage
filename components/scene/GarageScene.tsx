@@ -6,6 +6,7 @@ import CameraRig from "./CameraRig";
 import Atmosphere from "./Atmosphere";
 import PlaceholderHall from "./PlaceholderHall";
 import Cars from "./Cars";
+import LookControls from "./LookControls";
 import DevBridge from "@/components/dev/DevBridge";
 import { selection } from "@/lib/selectionStore";
 
@@ -34,6 +35,7 @@ export default function GarageScene() {
       >
         <color attach="background" args={["#0a0a0b"]} />
         <CameraRig />
+        <LookControls />
         <Atmosphere />
         <DevBridge />
         <Suspense fallback={null}>

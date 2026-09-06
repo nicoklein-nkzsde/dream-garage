@@ -7,6 +7,7 @@ import { buildCarGeometry } from "@/lib/carGeometry";
 import type { Car as CarData } from "@/lib/cars";
 import { hovered, selection } from "@/lib/selectionStore";
 import { scrollState } from "@/components/scroll/scrollState";
+import { lookState } from "@/lib/lookState";
 
 const TYRE = "#111113";
 const RIM = "#8b8b92";
@@ -60,7 +61,7 @@ export default function Car({ car, rotation }: Props) {
     <group
       rotation-y={rotation}
       onPointerOver={(event) => {
-        if (scrollState.p < 0.9) return;
+        if (scrollState.p < 0.9 || lookState.dragging) return;
         event.stopPropagation();
         hovered.set(car.id);
         document.body.style.cursor = "pointer";
@@ -70,7 +71,8 @@ export default function Car({ car, rotation }: Props) {
         document.body.style.cursor = "";
       }}
       onClick={(event) => {
-        if (scrollState.p < 0.9) return;
+        // Wer gezogen hat, wollte sich umsehen und kein Auto öffnen.
+        if (scrollState.p < 0.9 || lookState.dragged) return;
         event.stopPropagation();
         selection.set(car.id);
       }}

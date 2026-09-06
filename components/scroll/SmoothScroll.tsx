@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { setProgress } from "./scrollState";
 import { CHOREOGRAPHY_ID } from "./constants";
 import { selection } from "@/lib/selectionStore";
+import { lookState } from "@/lib/lookState";
 import { REDUCED_MOTION_STOPS } from "@/lib/cameraPath";
 
 /** Nachlauf des Scrubs in Sekunden. Briefing Abschnitt 4. */
@@ -40,6 +41,10 @@ export default function SmoothScroll() {
         target.__lenis = lenis;
         target.__setProgress = setProgress;
         target.__select = (id: string | null) => selection.set(id);
+        target.__look = (yaw: number, pitch = 0) => {
+          lookState.yaw = lookState.targetYaw = yaw;
+          lookState.pitch = lookState.targetPitch = pitch;
+        };
       }
     }
 

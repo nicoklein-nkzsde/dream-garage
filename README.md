@@ -69,6 +69,13 @@ Läuft:
   Panel und die Kamera fährt in Dreiviertelansicht heran, Escape schließt
 - Wunschautos als schwebendes Drahtgitter, freie Plätze bleiben leer
 - Tastatur: Tab durch die Stellplatzliste, Enter öffnet das Panel
+- Umsehen in der Halle: Ziehen mit der Maus dreht den Blick, begrenzt auf
+  rund 80 Grad zur Seite. Gedämpft, damit es schwebt statt zu schwenken.
+  Im Ruhezustand eine leichte Parallaxe über die Zeigerposition. Nur auf
+  feinen Zeigegeräten — auf Touch würde das mit dem Scrollen kollidieren.
+  Wer zieht, wählt kein Auto aus; erst ein Klick ohne Bewegung öffnet das
+  Panel. Die Ziehrichtung folgt der Greif-Konvention: nach rechts ziehen
+  dreht den Blick nach links (`LookControls.tsx`, Vorzeichen in einer Zeile)
 
 Offen, bewusst noch nicht angefasst (Phasen 2 bis 6):
 

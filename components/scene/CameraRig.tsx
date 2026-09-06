@@ -13,6 +13,7 @@ import { scrollState } from "@/components/scroll/scrollState";
 import { HALL } from "@/lib/hall";
 import { SLOTS_WITH_CARS } from "@/lib/cars";
 import { selection } from "@/lib/selectionStore";
+import { lookState, resetLook } from "@/lib/lookState";
 
 /** Verschiebung der Draufsicht nach oben, in Metern. */
 const PLAN_FRAMING_SHIFT = 1.5;
@@ -27,6 +28,13 @@ const position = new Vector3();
 const target = new Vector3();
 const focusPosition = new Vector3();
 const focusTarget = new Vector3();
+const forward = new Vector3();
+const right = new Vector3();
+const UP = new Vector3(0, 1, 0);
+
+/** Leichte Parallaxe im Ruhezustand, damit der Blick nicht tot steht. */
+const PARALLAX_YAW = 0.045;
+const PARALLAX_PITCH = 0.022;
 
 /** Stellplatz zu jedem Auto, für die Anfahrt beim Klick. */
 const SLOT_BY_CAR = new Map(
@@ -85,6 +93,38 @@ export default function CameraRig() {
       focusTarget.set(focused.x, 0.8, focused.z);
       position.lerp(focusPosition, blend);
       target.lerp(focusTarget, blend);
+    }
+
+    // Umsehen in der Halle. Das Ziel folgt gedämpft, das ergibt den
+    // schwebenden Nachlauf; die Kameraposition selbst bleibt, wo der
+    // Scrollwert sie hinstellt.
+    // Beim Anfahren eines Autos wird das Umsehen nur ausgeblendet, nicht
+    // zurückgesetzt: nach dem Schließen steht der Blick wieder da, wo der
+    // Besucher ihn gelassen hat. Zurückgesetzt wird erst beim Verlassen.
+    const hallPhase = smoothstep(INTERACTIVE_FROM, 0.98, p);
+    if (hallPhase < 0.001) resetLook();
+    const inHall = hallPhase * (1 - blend);
+
+    const damping = Math.min(1, delta * 3.5);
+    lookState.yaw += (lookState.targetYaw - lookState.yaw) * damping;
+    lookState.pitch += (lookState.targetPitch - lookState.pitch) * damping;
+
+    const yaw =
+      (lookState.yaw +
+        (lookState.dragging ? 0 : lookState.pointerX * PARALLAX_YAW)) *
+      inHall;
+    const pitch =
+      (lookState.pitch +
+        (lookState.dragging ? 0 : -lookState.pointerY * PARALLAX_PITCH)) *
+      inHall;
+
+    if (Math.abs(yaw) > 1e-4 || Math.abs(pitch) > 1e-4) {
+      forward.subVectors(target, position);
+      const distance = forward.length();
+      forward.applyAxisAngle(UP, yaw);
+      right.crossVectors(forward, UP).normalize();
+      forward.applyAxisAngle(right, pitch);
+      target.copy(position).addScaledVector(forward.normalize(), distance);
     }
 
     camera.position.copy(position);
