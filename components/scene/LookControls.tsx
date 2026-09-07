@@ -18,16 +18,22 @@ const YAW_PER_PIXEL = 0.0022;
 const PITCH_PER_PIXEL = 0.0018;
 
 /**
- * Umsehen per Maus. Nur auf Zeigegeräten mit feiner Auflösung — auf
- * Touchgeräten würde das Ziehen mit dem Scrollen kollidieren, dafür kommt
- * in Phase 5 der eigene Renderpfad.
+ * Umsehen per Ziehen, auf Maus und Finger.
+ *
+ * Auf dem Handy teilt sich die Geste sauber auf: `touch-action: pan-y`
+ * überlässt senkrechte Wischer dem Browser, der damit weiter scrollt, und
+ * meldet uns per pointercancel, dass er die Geste übernommen hat.
+ * Waagerechte Wischer bleiben bei uns und drehen den Blick.
  */
 export default function LookControls() {
   const canvas = useThree((state) => state.gl.domElement);
 
   useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    const fine = window.matchMedia("(pointer: fine)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Senkrecht scrollt der Browser, waagerecht drehen wir.
+    canvas.style.touchAction = "pan-y";
 
     let startX = 0;
     let startY = 0;
@@ -38,6 +44,8 @@ export default function LookControls() {
 
     const onPointerDown = (event: PointerEvent) => {
       if (event.button !== 0 || !inHall()) return;
+      // Zwei Finger sind eine Browsergeste, keine Blickdrehung.
+      if (event.pointerType === "touch" && event.isPrimary === false) return;
       lookState.dragging = true;
       lookState.dragged = false;
       startX = event.clientX;
@@ -49,13 +57,15 @@ export default function LookControls() {
     };
 
     const onPointerMove = (event: PointerEvent) => {
-      // Parallaxe im Ruhezustand: der Blick lebt ein wenig mit.
-      const rect = canvas.getBoundingClientRect();
-      lookState.pointerX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      lookState.pointerY = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+      if (event.pointerType === "mouse") {
+        // Parallaxe im Ruhezustand: der Blick lebt ein wenig mit.
+        const rect = canvas.getBoundingClientRect();
+        lookState.pointerX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        lookState.pointerY = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+      }
 
       if (!lookState.dragging) {
-        canvas.style.cursor = inHall() ? "grab" : "";
+        if (fine) canvas.style.cursor = inHall() ? "grab" : "";
         return;
       }
 
@@ -89,7 +99,7 @@ export default function LookControls() {
     const onPointerUp = (event: PointerEvent) => {
       if (!lookState.dragging) return;
       lookState.dragging = false;
-      canvas.style.cursor = inHall() ? "grab" : "";
+      if (fine) canvas.style.cursor = inHall() ? "grab" : "";
       if (canvas.hasPointerCapture(event.pointerId)) {
         canvas.releasePointerCapture(event.pointerId);
       }
@@ -103,13 +113,17 @@ export default function LookControls() {
     canvas.addEventListener("pointerdown", onPointerDown);
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
+    // Der Browser hat die Geste zum Scrollen übernommen.
+    window.addEventListener("pointercancel", onPointerUp);
     canvas.addEventListener("pointerleave", onLeave);
     return () => {
       canvas.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerUp);
       canvas.removeEventListener("pointerleave", onLeave);
       canvas.style.cursor = "";
+      canvas.style.touchAction = "";
       resetLook();
     };
   }, [canvas]);

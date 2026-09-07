@@ -8,6 +8,7 @@ import type { Car as CarData } from "@/lib/cars";
 import { hovered, selection } from "@/lib/selectionStore";
 import { scrollState } from "@/components/scroll/scrollState";
 import { lookState } from "@/lib/lookState";
+import { detectQuality } from "@/lib/device";
 
 const TYRE = "#111113";
 const RIM = "#8b8b92";
@@ -49,11 +50,14 @@ export default function Car({ car, rotation }: Props) {
   });
 
   const { wheel, anchors, width } = geometry;
+  // Klarlack ist die teuerste Zutat am Lack. Auf schwachen Geräten fällt
+  // er weg und die Rauheit gleicht den Verlust an Glanz aus.
+  const rich = detectQuality() === "high";
   const paintProps = {
     color: car.accent,
-    metalness: 0.55,
-    roughness: 0.32,
-    clearcoat: 1,
+    metalness: rich ? 0.55 : 0.7,
+    roughness: rich ? 0.32 : 0.24,
+    clearcoat: rich ? 1 : 0,
     clearcoatRoughness: 0.06,
   };
 
@@ -99,7 +103,7 @@ export default function Car({ car, rotation }: Props) {
             color={GLASS}
             metalness={0.85}
             roughness={0.06}
-            clearcoat={1}
+            clearcoat={rich ? 1 : 0}
           />
         </mesh>
 

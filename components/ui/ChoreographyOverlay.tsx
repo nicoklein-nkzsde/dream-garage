@@ -28,16 +28,17 @@ export default function ChoreographyOverlay() {
         <p className="mt-4 max-w-sm text-sm text-muted">
           TODO: Einleitungstext von Nico
         </p>
-        <p className="tech-label mt-8 flex items-center gap-3">
+        <p className="tech-label mt-5 flex items-center gap-3 md:mt-8">
           <span className="inline-block h-px w-10 bg-accent" />
           Scrollen
         </p>
       </FadeRange>
 
-      {/* Grundriss-Beschriftung, Abschnitt 4 */}
+      {/* Grundriss-Beschriftung, Abschnitt 4.
+          Auf dem Handy oben rechts, sonst läge sie auf dem Titel. */}
       <FadeRange
         range={[-0.05, -0.04, 0.2, 0.34]}
-        className="absolute right-0 bottom-0 p-6 text-right md:p-12"
+        className="absolute top-0 right-0 p-6 text-right md:top-auto md:bottom-0 md:p-12"
       >
         <p className="tech-label">Grundriss</p>
         <p className="font-tech mt-2 text-2xl tracking-[0.12em] uppercase">

@@ -81,6 +81,13 @@ export default function CameraRig() {
     position.z += framing;
     target.z += framing;
 
+    // Hochkant ist das waagerechte Sichtfeld winzig: bei 375 zu 812 bleiben
+    // von 55 Grad senkrecht nur rund 27 Grad waagerecht übrig, man steht in
+    // der Halle und sieht nichts. Zwei Gegenmittel, beide nur im Hochformat:
+    // mehr Sichtfeld und ein Schritt zurück.
+    const aspect = size.width / Math.max(1, size.height);
+    const portrait = 1 - smoothstep(0.55, 1.1, aspect);
+
     const blend = smoothstep(0, 1, focus.current);
     const focused = lastFocused.current;
     if (blend > 0.001 && focused) {
@@ -93,6 +100,17 @@ export default function CameraRig() {
       focusTarget.set(focused.x, 0.8, focused.z);
       position.lerp(focusPosition, blend);
       target.lerp(focusTarget, blend);
+    }
+
+    if (portrait > 0.001) {
+      const arriving = smoothstep(0.45, 0.95, p);
+      // Rückwärts entlang der Blickachse, gewichtet nach Fortschritt:
+      // die Draufsicht regelt sich schon über das Sichtfeld.
+      forward.subVectors(position, target).normalize();
+      position.addScaledVector(forward, 5.5 * portrait * arriving);
+      // Etwas höher zielen. Sonst füllt der leere Boden davor das halbe
+      // Hochformat, während oben die Lampenreihen aus dem Bild laufen.
+      target.y += 0.55 * portrait * arriving;
     }
 
     // Umsehen in der Halle. Das Ziel folgt gedämpft, das ergibt den
@@ -133,7 +151,6 @@ export default function CameraRig() {
     // Auf schmalen Viewports passt die 40 m lange Halle in der Draufsicht
     // sonst nicht ins Bild. Nur dort wird das Sichtfeld aufgezogen, auf
     // Desktop-Seitenverhältnissen bleibt der Verlauf 35 -> 55 unangetastet.
-    const aspect = size.width / Math.max(1, size.height);
     const needed = MathUtils.radToDeg(
       2 * Math.atan(HALL.length / 2 / Math.max(1, camera.position.y * aspect)),
     );
@@ -143,7 +160,8 @@ export default function CameraRig() {
       Math.max(fovAt(p), needed * PLAN_MARGIN * planPhase),
     );
     // In der Nahansicht etwas enger, das nimmt die Verzerrung heraus.
-    const fov = pathFov + (42 - pathFov) * blend;
+    const focusFov = pathFov + (42 - pathFov) * blend;
+    const fov = Math.min(82, focusFov * (1 + 0.3 * portrait));
     if (Math.abs(camera.fov - fov) > 0.01) {
       camera.fov = fov;
       camera.updateProjectionMatrix();

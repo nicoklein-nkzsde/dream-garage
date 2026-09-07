@@ -54,7 +54,7 @@ Node wurde über Homebrew installiert (`brew install node`).
 Der Fortschrittswert `p` (0 bis 1) ist die einzige Quelle für Kamera, Licht,
 Nebel und Textblenden. Kein zweiter Trigger, kein `lerp` im Renderloop.
 
-## Stand: Phase 1 und 3 abgeschlossen, Phase 2 offen
+## Stand: Phasen 1, 3 und 5 abgeschlossen, Phase 2 offen
 
 Läuft:
 
@@ -117,6 +117,39 @@ Dachhauses. `wing: true` setzt einen festen Heckflügel.
 Bauformen für `body`: `coupe`, `roadster`, `hatch`, `sedan`, `wagon`, `suv`,
 `van`. Sobald ein `model3d` oder `splat` hinterlegt ist, ersetzt es die
 gerechnete Geometrie, ohne dass sich sonst etwas ändert.
+
+### Handy
+
+Kein zweiter Renderpfad. Das Briefing sah dafür eine in Blender gerenderte
+Bildsequenz vor; die Szene ist mit rund 15.000 Dreiecken aber leicht genug,
+um echt zu laufen. Teuer sind allein die Deckenstrahler und das
+Kantenglätten, und genau die regelt `lib/device.ts` herunter:
+
+| | stark | schwach |
+|---|---|---|
+| Pixelverhältnis | bis 2 | bis 1,5 |
+| Kantenglättung | an | aus |
+| Deckenstrahler | 10 | 5, Gehäuse bleiben alle sichtbar |
+| Klarlack auf dem Lack | an | aus |
+
+Erkennung wie im Briefing über Zeigegerät, Kerne und Speicher, im Zweifel
+die sparsame Stufe.
+
+Weiteres fürs Handy:
+
+- Umsehen per Wischen. `touch-action: pan-y` überlässt senkrechte Wischer
+  dem Browser, der damit weiter scrollt, und meldet per `pointercancel`,
+  dass er die Geste übernommen hat. Waagerechte drehen den Blick.
+- Im Hochformat bleiben von 55 Grad senkrechtem Sichtfeld nur rund 27 Grad
+  waagerecht übrig. Dagegen: mehr Sichtfeld, ein Schritt zurück und ein
+  etwas höherer Zielpunkt, alles nur im Hochformat und nur beim Ankommen.
+- Scrollstrecke der Fahrt auf 460svh statt 620svh.
+- Die Grundriss-Beschriftung sitzt schmal oben rechts, sonst läge sie
+  auf dem Titel.
+
+Ungelöst bleibt: hochkant sieht man immer nur einen Ausschnitt der 40 m
+breiten Halle. Wischen führt zu den übrigen Autos, die vollständige
+Übersicht ist die Stellplatzliste in Sektion 3.
 
 ### Abweichungen vom Briefing
 

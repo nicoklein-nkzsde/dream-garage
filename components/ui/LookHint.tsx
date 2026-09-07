@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { onProgress } from "@/components/scroll/scrollState";
 import { lookState } from "@/lib/lookState";
+import { isTouch } from "@/lib/device";
 import { INTERACTIVE_FROM } from "@/components/scene/CameraRig";
 
 /**
@@ -14,14 +15,17 @@ export default function LookHint() {
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    const element = ref.current;
+    if (element && isTouch()) {
+      element.textContent = "Wischen zum Umsehen · Tippen öffnet ein Auto";
+    }
 
     let visible = false;
     const set = (next: boolean) => {
       if (next === visible) return;
       visible = next;
-      const element = ref.current;
-      if (element) element.style.opacity = next ? "1" : "0";
+      const node = ref.current;
+      if (node) node.style.opacity = next ? "1" : "0";
     };
 
     const unsubscribe = onProgress((p) => {

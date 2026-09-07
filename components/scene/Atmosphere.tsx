@@ -7,6 +7,7 @@ import type { AmbientLight, DirectionalLight, Group, SpotLight } from "three";
 import { smoothstep } from "@/lib/cameraPath";
 import { scrollState } from "@/components/scroll/scrollState";
 import { HALL } from "@/lib/hall";
+import { detectQuality } from "@/lib/device";
 
 const INK = "#0a0a0b";
 
@@ -54,11 +55,21 @@ export default function Atmosphere() {
   });
 
   // Deckenstrahler über den Reihen, Vorstufe der RectAreaLights aus Phase 2.
+  const quality = detectQuality();
   const lamps = useMemo(() => {
     const rows = [ROW_LIGHT_FRONT, ROW_LIGHT_BACK];
     const columns = [-15, -7.5, 0, 7.5, 15];
-    return rows.flatMap((z) => columns.map((x) => [x, HALL.eaves - 0.5, z]));
-  }, []);
+    return rows.flatMap((z) =>
+      columns.map((x, index) => [
+        x,
+        HALL.eaves - 0.5,
+        z,
+        // Auf schwachen Geräten leuchtet nur jede zweite Lampe. Die
+        // Gehäuse bleiben alle sichtbar, die Reihe wirkt vollständig.
+        quality === "high" || index % 2 === 0 ? 1 : 0,
+      ]),
+    );
+  }, [quality]);
 
   return (
     <>
@@ -70,8 +81,12 @@ export default function Atmosphere() {
         color="#cfd6e0"
       />
       <group ref={practicals} visible={false}>
-        {lamps.map((position, index) => (
-          <SpotDown key={index} position={position as [number, number, number]} />
+        {lamps.map(([x, y, z, lit], index) => (
+          <SpotDown
+            key={index}
+            position={[x, y, z]}
+            lit={lit === 1}
+          />
         ))}
       </group>
     </>
@@ -82,25 +97,37 @@ export default function Atmosphere() {
  * Strahler, der nach unten leuchtet. Ein Punktlicht direkt unter dem Dach
  * würde vor allem die Dachschräge anstrahlen, nicht den Boden.
  */
-function SpotDown({ position }: { position: [number, number, number] }) {
+function SpotDown({
+  position,
+  lit,
+}: {
+  position: [number, number, number];
+  lit: boolean;
+}) {
   // Das Ziel muss im Szenengraph hängen, sonst rechnet three die Richtung
   // gegen den Ursprung und alle Strahler zeigen zur Hallenmitte.
   const target = useMemo(() => new Object3D(), []);
 
   return (
     <>
-      <primitive object={target} position={[position[0], 0, position[2]]} />
-      <spotLight
-        position={position}
-        target={target}
-        intensity={0}
-        distance={22}
-        decay={2}
-        angle={1.02}
-        penumbra={0.75}
-        color="#ffe0bb"
-      />
-      {/* Sichtbares Gehäuse, sonst schwebt das Licht im Nichts. */}
+      {lit && (
+        <>
+          <primitive object={target} position={[position[0], 0, position[2]]} />
+          <spotLight
+            position={position}
+            target={target}
+            intensity={0}
+            distance={22}
+            decay={2}
+            angle={1.02}
+            penumbra={0.75}
+            color="#ffe0bb"
+          />
+        </>
+      )}
+      {/* Sichtbares Gehäuse, sonst schwebt das Licht im Nichts.
+          Es bleibt auch dann stehen, wenn die Lampe nicht leuchtet —
+          eine Reihe mit Lücken sähe nach Defekt aus. */}
       <mesh position={[position[0], position[1] + 0.12, position[2]]}>
         <boxGeometry args={[1.6, 0.1, 0.28]} />
         <meshStandardMaterial

@@ -76,7 +76,7 @@ export function HallSection() {
                 <button
                   type="button"
                   onClick={() => selection.set(car.id)}
-                  className={`tech-label cursor-pointer border px-3 py-2 text-paper hover:border-accent hover:text-accent ${
+                  className={`tech-label flex min-h-11 cursor-pointer items-center border px-3 py-2 text-paper hover:border-accent hover:text-accent ${
                     car.id === selectedId ? "border-accent" : "border-line"
                   }`}
                 >

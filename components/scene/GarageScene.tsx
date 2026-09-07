@@ -9,18 +9,23 @@ import Cars from "./Cars";
 import LookControls from "./LookControls";
 import DevBridge from "@/components/dev/DevBridge";
 import { selection } from "@/lib/selectionStore";
+import { detectQuality } from "@/lib/device";
 
 /**
  * Der Canvas liegt fixed hinter der Seite. Die HTML-Sektionen scrollen
  * darüber und steuern über p die Kamera.
  */
 export default function GarageScene() {
+  const quality = detectQuality();
+
   return (
     <div className="fixed inset-0 z-0" aria-hidden="true">
       <Canvas
-        dpr={[1, 2]}
+        // Auf schwachen Geräten weniger Pixel und kein Kantenglätten.
+        // Das kostet die Halle nichts, sie hat kaum harte Kanten.
+        dpr={quality === "high" ? [1, 2] : [1, 1.5]}
         gl={{
-          antialias: true,
+          antialias: quality === "high",
           powerPreference: "high-performance",
           // Nur im Dev-Build, damit sich der Canvas auslesen lässt.
           preserveDrawingBuffer: process.env.NODE_ENV !== "production",

@@ -8,7 +8,7 @@ import LookHint from "@/components/ui/LookHint";
 import { HallSection, PeopleSection, SiteFooter } from "@/components/ui/Sections";
 
 /** Höhe der Kamerafahrt in Viewport-Höhen. Mehr = ruhigere Fahrt. */
-const CHOREOGRAPHY_HEIGHT = "620svh";
+
 
 export default function Home() {
   return (
@@ -29,9 +29,10 @@ export default function Home() {
 
       <main>
         {/* Sektion 0–2: reine Scrollstrecke, die die Kamera treibt. */}
+        {/* Auf dem Handy kürzer: dieselbe Fahrt, weniger Wischerei. */}
         <div
           id={CHOREOGRAPHY_ID}
-          style={{ height: CHOREOGRAPHY_HEIGHT }}
+          className="h-[460svh] md:h-[620svh]"
           aria-hidden="true"
         />
 
