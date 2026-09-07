@@ -1,72 +1,90 @@
 /**
- * Zeichnet die Seitenansicht jedes Autos aus content/cars.json als SVG.
+ * Zeichnet jedes Auto aus content/cars.json in Seiten- und Draufsicht.
  *
- * Die Silhouette ist das, woran man ein Auto grob erkennt. Sie hier flach
- * zu prüfen geht schneller als jedes Mal die 3D-Szene zu laden.
+ * Silhouette und Grundriss sind das, woran man ein Auto grob erkennt.
+ * Sie hier flach zu prüfen geht schneller als jedes Mal die Szene zu laden.
  *
- *   npm run profiles   ->   public/_profiles.svg und public/_profiles.html
+ *   npm run profiles   ->   public/_profiles.svg
  */
 import { writeFileSync } from "node:fs";
-import { buildCarGeometry } from "../lib/carGeometry.ts";
+import { buildCarProfile } from "../lib/carGeometry.ts";
 import type { Car } from "../lib/cars.ts";
 import cars from "../content/cars.json" with { type: "json" };
 
-const SCALE = 96; // Pixel pro Meter
-const COLUMNS = 3;
-const CELL_W = 560;
-const CELL_H = 230;
-const BASE_Y = 176; // Fahrbahn innerhalb der Zelle
+const SCALE = 88;
+const COLUMNS = 2;
+const CELL_W = 620;
+const CELL_H = 350;
+const SIDE_Y = 168;
+const TOP_Y = 262;
+const SAMPLES = 120;
 
 const list = cars as unknown as Car[];
 
 function card(car: Car, index: number) {
-  const g = buildCarGeometry(car);
-  const { length, width, height } = car.dimensions;
+  const p = buildCarProfile(car);
   const ox = (index % COLUMNS) * CELL_W;
   const oy = Math.floor(index / COLUMNS) * CELL_H;
   const cx = ox + CELL_W / 2;
 
-  // Fahrzeugmitte auf Zellenmitte, Boden auf BASE_Y.
-  const px = (x: number) => cx + x * SCALE;
-  const py = (y: number) => oy + BASE_Y - y * SCALE;
-  const path = (points: { x: number; y: number }[]) =>
-    points.map((p, i) => `${i ? "L" : "M"}${px(p.x).toFixed(1)},${py(p.y).toFixed(1)}`).join(" ") + " Z";
+  const xs = Array.from(
+    { length: SAMPLES },
+    (_, i) => -p.length / 2 + (p.length * i) / (SAMPLES - 1),
+  );
+  const px = (x: number) => (cx + x * SCALE).toFixed(1);
+  const side = (y: number) => (oy + SIDE_Y - y * SCALE).toFixed(1);
+  const top = (z: number) => (oy + TOP_Y + z * SCALE).toFixed(1);
 
-  const { radius, axleX } = g.wheel;
-  const wheels = [-axleX, axleX]
-    .map((x) => `<circle cx="${px(x).toFixed(1)}" cy="${py(radius).toFixed(1)}" r="${(radius * SCALE).toFixed(1)}" fill="#121214" stroke="#3a3a40" stroke-width="1"/>
-      <circle cx="${px(x).toFixed(1)}" cy="${py(radius).toFixed(1)}" r="${(radius * 0.62 * SCALE).toFixed(1)}" fill="#6f7076"/>`)
+  // Seitenansicht: oben nach vorn, unten mit den Radläufen zurück.
+  const silhouette =
+    xs.map((x, i) => `${i ? "L" : "M"}${px(x)},${side(p.topAt(x))}`).join(" ") +
+    " " +
+    [...xs].reverse().map((x) => `L${px(x)},${side(p.bottomAt(x))}`).join(" ") +
+    " Z";
+
+  const glassXs = xs.filter((x) => x >= p.glassSpan[0] && x <= p.glassSpan[1]);
+  const house =
+    glassXs.map((x, i) => `${i ? "L" : "M"}${px(x)},${side(Math.max(p.belt, p.roofAt(x)))}`).join(" ") +
+    ` L${px(glassXs[glassXs.length - 1])},${side(p.belt)}` +
+    ` L${px(glassXs[0])},${side(p.belt)} Z`;
+
+  // Draufsicht: halbe Breite nach beiden Seiten gespiegelt.
+  const plan =
+    xs.map((x, i) => `${i ? "M" : "M"}${px(x)},${top(p.halfWidthAt(x))}`).slice(0, 1).join("") +
+    xs.map((x) => `L${px(x)},${top(p.halfWidthAt(x))}`).join(" ") +
+    " " +
+    [...xs].reverse().map((x) => `L${px(x)},${top(-p.halfWidthAt(x))}`).join(" ") +
+    " Z";
+
+  const wheelR = car.dimensions.height * 0.26;
+  const axle = car.dimensions.wheelbase / 2;
+  const wheels = [-axle, axle]
+    .map(
+      (x) =>
+        `<circle cx="${px(x)}" cy="${side(wheelR)}" r="${(wheelR * SCALE).toFixed(1)}" fill="#0d0d0f" stroke="#3a3a40"/>` +
+        `<circle cx="${px(x)}" cy="${side(wheelR)}" r="${(wheelR * 0.6 * SCALE).toFixed(1)}" fill="#6f7076"/>`,
+    )
     .join("");
 
-  const wing = car.wing
-    ? `<rect x="${px(g.anchors.rear + 0.35).toFixed(1)}" y="${py(g.anchors.belt + 0.28).toFixed(1)}" width="${(0.3 * SCALE).toFixed(1)}" height="${(0.04 * SCALE).toFixed(1)}" fill="#1b1b1f"/>
-       <rect x="${px(g.anchors.rear + 0.48).toFixed(1)}" y="${py(g.anchors.belt + 0.26).toFixed(1)}" width="4" height="${(0.24 * SCALE).toFixed(1)}" fill="#1b1b1f"/>`
-    : "";
-
   return `<g>
-    <line x1="${ox + 24}" y1="${oy + BASE_Y}" x2="${ox + CELL_W - 24}" y2="${oy + BASE_Y}" stroke="#2a2a2f" stroke-width="1"/>
+    <text x="${ox + 26}" y="${oy + 32}" fill="#e8e8e6" font-family="system-ui,sans-serif" font-size="15" font-weight="600">${car.make} ${car.model}</text>
+    <text x="${ox + 26}" y="${oy + 51}" fill="#8a8a90" font-family="system-ui,sans-serif" font-size="10.5" letter-spacing="1.2">${car.body.toUpperCase()} · ${car.dimensions.length.toFixed(2)} × ${car.dimensions.width.toFixed(2)} × ${car.dimensions.height.toFixed(2)} M${car.slot ? ` · PLATZ ${String(car.slot).padStart(2, "0")}` : " · WARTELISTE"}</text>
+    <line x1="${ox + 26}" y1="${oy + SIDE_Y}" x2="${ox + CELL_W - 26}" y2="${oy + SIDE_Y}" stroke="#2a2a2f"/>
     ${wheels}
-    <path d="${path(g.__shapes.body.getPoints(64))}" fill="${car.accent}" stroke="#00000055" stroke-width="1"/>
-    <path d="${path(g.__shapes.roof.getPoints(64))}" fill="${car.accent}" stroke="#00000055" stroke-width="1"/>
-    <path d="${path(g.__shapes.glass.getPoints(64))}" fill="#151a21"/>
-    ${wing}
-    <text x="${ox + 24}" y="${oy + 30}" fill="#e8e8e6" font-family="system-ui, sans-serif" font-size="15" font-weight="600">${car.make} ${car.model}</text>
-    <text x="${ox + 24}" y="${oy + 50}" fill="#8a8a90" font-family="system-ui, sans-serif" font-size="11" letter-spacing="1.2">${car.body.toUpperCase()} · ${length.toFixed(2)} × ${width.toFixed(2)} × ${height.toFixed(2)} M${car.slot ? ` · PLATZ ${String(car.slot).padStart(2, "0")}` : " · WARTELISTE"}</text>
+    <path d="${silhouette}" fill="${car.accent}" stroke="#00000055"/>
+    <path d="${house}" fill="#151a21"/>
+    <path d="${plan}" fill="${car.accent}" fill-opacity="0.5" stroke="${car.accent}" stroke-opacity="0.8"/>
+    <text x="${ox + CELL_W - 26}" y="${oy + TOP_Y + 4}" text-anchor="end" fill="#5a5a60" font-family="system-ui,sans-serif" font-size="9.5" letter-spacing="1.2">DRAUFSICHT</text>
   </g>`;
 }
 
 const rows = Math.ceil(list.length / COLUMNS);
 const w = COLUMNS * CELL_W;
 const h = rows * CELL_H;
-
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
 <rect width="${w}" height="${h}" fill="#0a0a0b"/>
 ${list.map(card).join("\n")}
 </svg>`;
 
 writeFileSync("public/_profiles.svg", svg);
-writeFileSync(
-  "public/_profiles.html",
-  `<!doctype html><meta charset="utf-8"><title>Silhouetten</title><body style="margin:0;background:#0a0a0b">${svg}</body>`,
-);
-console.log(`${list.length} Silhouetten -> public/_profiles.svg`);
+console.log(`${list.length} Autos -> public/_profiles.svg`);

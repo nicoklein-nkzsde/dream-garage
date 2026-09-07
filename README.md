@@ -63,8 +63,11 @@ Läuft:
 - Licht-, Nebel- und Dachblende am selben Scrollwert
 - Textebene über der Fahrt, Sektionen 3 bis 5 als normale Seite darunter
 - `prefers-reduced-motion`: vier harte Standbilder statt der Fahrt
-- Fahrzeugkörper aus Länge, Breite, Höhe, Radstand und Bauform gerechnet:
-  Radläufe, Dachhaus, Räder, Lack mit Klarlack. Rund 1300 Dreiecke pro Auto.
+- Fahrzeugkörper aus Länge, Breite, Höhe, Radstand und Bauform gerechnet.
+  Drei Kurven über die Längsachse — Unterkante, Oberkante, halbe Breite —
+  werden zu einem Körper genäht. Dadurch verjüngt sich die Nase, das Heck
+  zieht ein und über den Rädern bleibt ein echter Radlauf offen. Rund 5000
+  Dreiecke pro Auto, auf schwachen Geräten weniger.
 - Hover mit Umriss in Fahrzeugfarbe und Label an der Maus, Klick öffnet das
   Panel und die Kamera fährt in Dreiviertelansicht heran, Escape schließt
 - Wunschautos als schwebendes Drahtgitter, freie Plätze bleiben leer
@@ -102,12 +105,32 @@ Ziel der 3D-Darstellung ist, dass man jedes Auto **grob** an seiner
 Silhouette erkennt, nicht mehr. Die vollständigen Daten stehen im Panel und
 müssen in der Szene nicht ablesbar sein.
 
-`npm run profiles` zeichnet alle Seitenansichten als SVG nach
+`npm run profiles` zeichnet alle Seiten- und Draufsichten als SVG nach
 `public/_profiles.svg`. Das ist der schnellste Weg, eine Silhouette
 nachzujustieren — flach prüfen statt jedes Mal die 3D-Szene laden.
 
 Technische Werte stammen nicht von Nico oder Lion. Wo etwas unklar war,
 steht ein `note`-Feld im Eintrag; das erscheint auch im Panel.
+
+### Eigene 3D-Modelle einsetzen
+
+Liegt bei einem Auto ein `model3d` an, ersetzt es die gerechnete Karosserie
+vollständig — Räder, Spiegel und Leuchten bringt das Modell dann selbst mit.
+
+1. Datei nach `public/models/` legen, zum Beispiel `997-gt3.glb`.
+2. In `content/cars.json` beim Auto `"model3d": "/models/997-gt3.glb"`
+   eintragen. Der Basispfad für GitHub Pages kommt aus `lib/assets.ts`,
+   der Pfad in der JSON bleibt also mit führendem Schrägstrich.
+
+`CarModel.tsx` misst das Modell, skaliert es auf die in `dimensions`
+hinterlegte Länge, dreht es in Fahrtrichtung, zentriert es auf dem
+Stellplatz und setzt es auf den Boden. Einheiten und Ursprung im Export
+sind deshalb egal.
+
+Anforderungen: `.glb`, Y nach oben, unter 3 MB pro Auto, Materialien als
+PBR (Metallic/Roughness). Ohne Kamera, ohne Licht, ohne Animation.
+
+### Formzahlen der gerechneten Karosserie
 
 Jedes Auto kann die Werte seiner Bauform über `shape` überschreiben:
 `belt` (Höhe der Gürtellinie), `roofCurve` (Wölbung der Dachlinie, hoch

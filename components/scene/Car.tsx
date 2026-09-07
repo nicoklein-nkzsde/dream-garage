@@ -9,6 +9,8 @@ import { hovered, selection } from "@/lib/selectionStore";
 import { scrollState } from "@/components/scroll/scrollState";
 import { lookState } from "@/lib/lookState";
 import { detectQuality } from "@/lib/device";
+import CarModel from "./CarModel";
+import { Suspense } from "react";
 
 const TYRE = "#111113";
 const RIM = "#8b8b92";
@@ -28,8 +30,49 @@ type Props = {
  * Auto an seiner Silhouette grob erkennt, nicht mehr.
  */
 export default function Car({ car, rotation }: Props) {
+  // Ein hinterlegtes Modell ersetzt die gerechnete Karosserie vollständig.
+  // Räder, Spiegel und Leuchten bringt es selbst mit.
+  const hasModel = Boolean(car.model3d);
+
+  return (
+    <group
+      rotation-y={rotation}
+      onPointerOver={(event) => {
+        if (scrollState.p < 0.9 || lookState.dragging) return;
+        event.stopPropagation();
+        hovered.set(car.id);
+        document.body.style.cursor = "pointer";
+      }}
+      onPointerOut={() => {
+        if (hovered.get() === car.id) hovered.set(null);
+        document.body.style.cursor = "";
+      }}
+      onClick={(event) => {
+        // Wer gezogen hat, wollte sich umsehen und kein Auto öffnen.
+        if (scrollState.p < 0.9 || lookState.dragged) return;
+        event.stopPropagation();
+        selection.set(car.id);
+      }}
+    >
+      {hasModel ? (
+        <Suspense fallback={null}>
+          <CarModel car={car as CarData & { model3d: string }} />
+        </Suspense>
+      ) : (
+        <ProceduralCar car={car} />
+      )}
+    </group>
+  );
+}
+
+/** Karosserie aus den Maßen gerechnet, solange kein Modell vorliegt. */
+function ProceduralCar({ car }: { car: CarData }) {
   const paint = useRef<MeshPhysicalMaterial>(null);
-  const geometry = useMemo(() => buildCarGeometry(car), [car]);
+  const quality = detectQuality();
+  const geometry = useMemo(
+    () => buildCarGeometry(car, quality),
+    [car, quality],
+  );
 
   useEffect(() => {
     return () => {
@@ -52,7 +95,7 @@ export default function Car({ car, rotation }: Props) {
   const { wheel, anchors, width } = geometry;
   // Klarlack ist die teuerste Zutat am Lack. Auf schwachen Geräten fällt
   // er weg und die Rauheit gleicht den Verlust an Glanz aus.
-  const rich = detectQuality() === "high";
+  const rich = quality === "high";
   const paintProps = {
     color: car.accent,
     metalness: rich ? 0.55 : 0.7,
@@ -62,26 +105,8 @@ export default function Car({ car, rotation }: Props) {
   };
 
   return (
-    <group
-      rotation-y={rotation}
-      onPointerOver={(event) => {
-        if (scrollState.p < 0.9 || lookState.dragging) return;
-        event.stopPropagation();
-        hovered.set(car.id);
-        document.body.style.cursor = "pointer";
-      }}
-      onPointerOut={() => {
-        if (hovered.get() === car.id) hovered.set(null);
-        document.body.style.cursor = "";
-      }}
-      onClick={(event) => {
-        // Wer gezogen hat, wollte sich umsehen und kein Auto öffnen.
-        if (scrollState.p < 0.9 || lookState.dragged) return;
-        event.stopPropagation();
-        selection.set(car.id);
-      }}
-    >
-      {/* Karosserie: die Seitenansicht liegt in X/Y, extrudiert in Z. */}
+    <>
+      {/* Längsachse liegt in X, für die Halle nach Z gedreht. */}
       <group rotation-y={Math.PI / 2}>
         <mesh geometry={geometry.body} castShadow>
           <meshPhysicalMaterial
@@ -211,6 +236,6 @@ export default function Car({ car, rotation }: Props) {
           </group>
         )}
       </group>
-    </group>
+    </>
   );
 }
